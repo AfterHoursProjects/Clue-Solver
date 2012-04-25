@@ -11,18 +11,10 @@ dialect "java"
 
 rule "eliminate card"
 	when
-		$card:Card( )
-		$list:TripleList( )
-		$triple:Triple( room==$card || suspect==$card || weapon==$card ) from $list
 	then
-		$list.remove($triple);
 end
 
 rule "eliminate triple"
 	when
-		$list:TripleList( )
-		Triple( $room:room, $suspect:suspect, $weapon:weapon )
-		$remove:Triple( room==$room, $suspect==suspect, $weapon==weapon ) from $list
 	then
-		$list.remove($remove);
 end
