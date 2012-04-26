@@ -9,5 +9,10 @@ import model.Triple;
 
 rule "create all triples" 
 	when
+		$suspect:Suspect(  )
+		$weapon:Weapon(  )
+		$room:Room(  )
+		$list:TripleList(  )
 	then
+		$list.addTriple($room, $suspect, $weapon);
 end

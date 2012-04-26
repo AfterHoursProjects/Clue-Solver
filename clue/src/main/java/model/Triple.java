@@ -50,11 +50,4 @@ public class Triple {
 		this.weapon = weapon;
 	}
 
-	public List<Card> getAtrributes() {
-		List<Card> attributes = new ArrayList<Card>();
-		attributes.add(this.room);
-		attributes.add(this.suspect);
-		attributes.add(this.weapon);
-		return attributes;
-	}
 }

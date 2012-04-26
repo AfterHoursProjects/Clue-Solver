@@ -42,11 +42,14 @@ public class ClueSessionService {
 	}
 	
 	public void eliminateCard(Card card){
-		//TODO: write this
+		clueSession.insert(card);
+		clueSession.fireAllRules();
 	}
 
 	public void eliminateTriple(Triple triple){
-		//TODO: write this
+		clueSession.insert(triple);
+		clueSession.fireAllRules();
+		
 	}
 
 	public StatefulKnowledgeSession getClueSession() {

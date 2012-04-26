@@ -1,5 +1,6 @@
 package service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import model.Card;
 import model.Triple;
@@ -28,7 +29,7 @@ public class ClueSessionServiceTest {
 				WeaponEnum.REVOLVER.getWeapon());
 		ClueSessionService service = new ClueSessionService();
 		service.eliminateTriple(triple);
-		assertTrue(service.getPossibilities().size() == Integer.valueOf(323));
+		assertEquals(Integer.valueOf(323).intValue(), service.getPossibilities().size());
 	}
 	
 	@Test
