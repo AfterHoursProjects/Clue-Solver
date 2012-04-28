@@ -29,11 +29,36 @@
 				<artifactId>Clue-Solver-Rules</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet</artifactId>
+				<version>2.0.13</version>
+			</dependency>
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.jackson</artifactId>
+				<version>2.0.13</version>
+			</dependency>
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.xstream</artifactId>
+				<version>2.0.13</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<repositories>
+		<repository>
+			<id>maven-restlet</id>
+			<name>Public online Restlet repository</name>
+			<url>http://maven.restlet.org</url>
+		</repository>
+	</repositories>
 
 	<modules>
 		<module>Clue-Solver-Rules</module>
 		<module>Clue-Solver-Models</module>
+		<module>Clue-Solver-Rest</module>
 	</modules>
 </project>
