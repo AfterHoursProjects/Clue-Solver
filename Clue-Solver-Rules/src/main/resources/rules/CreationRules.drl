@@ -1,0 +1,18 @@
+package rules;
+
+import model.Card;
+import model.Room;
+import model.Suspect;
+import model.Weapon;
+import model.TripleList;
+import model.Triple;
+
+rule "create all triples" 
+	when
+		$suspect:Suspect(  )
+		$weapon:Weapon(  )
+		$room:Room(  )
+		$list:TripleList(  )
+	then
+		$list.addTriple($room, $suspect, $weapon);
+end

@@ -1,0 +1,28 @@
+package rules;
+
+import model.Card;
+import model.Room;
+import model.Suspect;
+import model.Weapon;
+import model.TripleList;
+import model.Triple;
+
+dialect "java"
+
+rule "eliminate card"
+	when
+		$card:Card( )
+		$list:TripleList(  )
+		$triple:Triple( suspect==$card || weapon==$card || room==$card ) from $list
+	then
+		$list.remove($triple);
+end
+
+rule "eliminate triple"
+	when
+		$list:TripleList(  )
+		Triple( $suspect:suspect, $room:room, $weapon:weapon )
+		$triple:Triple( suspect==$suspect, room==$room, weapon==$weapon ) from $list
+	then
+		$list.remove($triple);
+end

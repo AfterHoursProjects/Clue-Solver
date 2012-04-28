@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="3.502" errors="0" skipped="0" tests="3" name="service.ClueSessionServiceTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
+    <property name="java.vm.version" value="20.1-b02-384"/>
+    <property name="awt.nativeDoubleBuffering" value="true"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="mrj.build" value="9M3425"/>
+    <property name="java.vm.vendor" value="Apple Inc."/>
+    <property name="java.vendor.url" value="http://www.apple.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules"/>
+    <property name="java.runtime.version" value="1.6.0_26-b03-384-9M3425"/>
+    <property name="java.awt.graphicsenv" value="apple.awt.CGraphicsEnvironment"/>
+    <property name="basedir" value="/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules"/>
+    <property name="java.endorsed.dirs" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="surefire.real.class.path" value="/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules/target/surefire/surefirebooter7333430916776984985.jar"/>
+    <property name="java.io.tmpdir" value="/var/folders/JC/JCfwzAJ1FNyvYY3+bEvhiE+++TI/-Tmp-/"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="sun.jnu.encoding" value="MacRoman"/>
+    <property name="java.library.path" value=".:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="surefire.test.class.path" value="/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules/target/test-classes:/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules/target/classes:/Users/matt/.m2/repository/org/drools/drools-compiler/5.4.0.CR1/drools-compiler-5.4.0.CR1.jar:/Users/matt/.m2/repository/org/drools/drools-core/5.4.0.CR1/drools-core-5.4.0.CR1.jar:/Users/matt/.m2/repository/org/drools/knowledge-api/5.4.0.CR1/knowledge-api-5.4.0.CR1.jar:/Users/matt/.m2/repository/org/drools/knowledge-internal-api/5.4.0.CR1/knowledge-internal-api-5.4.0.CR1.jar:/Users/matt/.m2/repository/org/antlr/antlr-runtime/3.3/antlr-runtime-3.3.jar:/Users/matt/.m2/repository/org/antlr/antlr/3.3/antlr-3.3.jar:/Users/matt/.m2/repository/org/antlr/stringtemplate/3.2.1/stringtemplate-3.2.1.jar:/Users/matt/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/Users/matt/.m2/repository/org/eclipse/jdt/core/compiler/ecj/3.5.1/ecj-3.5.1.jar:/Users/matt/.m2/repository/org/mvel/mvel2/2.1.0.drools10/mvel2-2.1.0.drools10.jar:/Users/matt/.m2/repository/junit/junit/4.10/junit-4.10.jar:/Users/matt/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Models/target/Clue-Solver-Models-0.2-SNAPSHOT.jar:"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.5.8"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/matt"/>
+    <property name="user.timezone" value="America/Chicago"/>
+    <property name="java.awt.printerjob" value="apple.awt.CPrinterJob"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="file.encoding" value="MacRoman"/>
+    <property name="user.name" value="matt"/>
+    <property name="java.class.path" value="/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules/target/test-classes:/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules/target/classes:/Users/matt/.m2/repository/org/drools/drools-compiler/5.4.0.CR1/drools-compiler-5.4.0.CR1.jar:/Users/matt/.m2/repository/org/drools/drools-core/5.4.0.CR1/drools-core-5.4.0.CR1.jar:/Users/matt/.m2/repository/org/drools/knowledge-api/5.4.0.CR1/knowledge-api-5.4.0.CR1.jar:/Users/matt/.m2/repository/org/drools/knowledge-internal-api/5.4.0.CR1/knowledge-internal-api-5.4.0.CR1.jar:/Users/matt/.m2/repository/org/antlr/antlr-runtime/3.3/antlr-runtime-3.3.jar:/Users/matt/.m2/repository/org/antlr/antlr/3.3/antlr-3.3.jar:/Users/matt/.m2/repository/org/antlr/stringtemplate/3.2.1/stringtemplate-3.2.1.jar:/Users/matt/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/Users/matt/.m2/repository/org/eclipse/jdt/core/compiler/ecj/3.5.1/ecj-3.5.1.jar:/Users/matt/.m2/repository/org/mvel/mvel2/2.1.0.drools10/mvel2-2.1.0.drools10.jar:/Users/matt/.m2/repository/junit/junit/4.10/junit-4.10.jar:/Users/matt/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Models/target/Clue-Solver-Models-0.2-SNAPSHOT.jar:"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"/>
+    <property name="sun.java.command" value="/Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules/target/surefire/surefirebooter7333430916776984985.jar /Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules/target/surefire/surefire3611249176285092600tmp /Users/matt/Workspaces/Eclipse 3.6 Java/Clue-Solver/Clue-Solver-Rules/target/surefire/surefire4359334384295621444tmp"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="apple.awt.CToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_26"/>
+    <property name="java.ext.dirs" value="/Library/Java/Extensions:/System/Library/Java/Extensions:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext"/>
+    <property name="sun.boot.class.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsfd.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar:/System/Library/Frameworks/JavaVM.framework/Frameworks/JavaRuntimeSupport.framework/Resources/Java/JavaRuntimeSupport.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/laf.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/sunrsasign.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsse.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jce.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/charsets.jar"/>
+    <property name="java.vendor" value="Apple Inc."/>
+    <property name="localRepository" value="/Users/matt/.m2/repository"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.apple.com/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="mrj.version" value="1050.1.6.0_26-384"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="2.925" classname="service.ClueSessionServiceTest" name="testEliminateCard"/>
+  <testcase time="0.194" classname="service.ClueSessionServiceTest" name="testEliminateTriple"/>
+  <testcase time="0.288" classname="service.ClueSessionServiceTest" name="testMultipleEliminations"/>
+</testsuite>
