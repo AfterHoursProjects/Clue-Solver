@@ -32,6 +32,14 @@ public class AfterActivationFiredEventListener implements AgendaEventListener {
 	}
 
 	@Override
+	public void afterRuleFlowGroupActivated(final RuleFlowGroupActivatedEvent event) {
+	}
+
+	@Override
+	public void afterRuleFlowGroupDeactivated(final RuleFlowGroupDeactivatedEvent event) {
+	}
+
+	@Override
 	public void agendaGroupPopped(final AgendaGroupPoppedEvent event) {
 	}
 
@@ -44,19 +52,11 @@ public class AfterActivationFiredEventListener implements AgendaEventListener {
 	}
 
 	@Override
-	public void beforeRuleFlowGroupActivated(RuleFlowGroupActivatedEvent event) {
+	public void beforeRuleFlowGroupActivated(final RuleFlowGroupActivatedEvent event) {
 	}
 
 	@Override
-	public void afterRuleFlowGroupActivated(RuleFlowGroupActivatedEvent event) {
-	}
-
-	@Override
-	public void beforeRuleFlowGroupDeactivated(RuleFlowGroupDeactivatedEvent event) {
-	}
-
-	@Override
-	public void afterRuleFlowGroupDeactivated(RuleFlowGroupDeactivatedEvent event) {
+	public void beforeRuleFlowGroupDeactivated(final RuleFlowGroupDeactivatedEvent event) {
 	}
 
 }
