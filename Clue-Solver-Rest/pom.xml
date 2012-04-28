@@ -6,7 +6,7 @@
 		<groupId>after.hours</groupId>
 		<version>0.2-SNAPSHOT</version>
 	</parent>
-	
+
 	<groupId>after.hours</groupId>
 	<artifactId>Clue-Solver-Rest</artifactId>
 	<version>0.2-SNAPSHOT</version>
@@ -34,6 +34,11 @@
 		<dependency>
 			<groupId>org.restlet.jse</groupId>
 			<artifactId>org.restlet.ext.xstream</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
 

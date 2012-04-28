@@ -1,5 +1,8 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import listeners.AfterActivationFiredEventListener;
 import model.Card;
 import model.Triple;
@@ -14,16 +17,16 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 
 public class ClueSessionService {
-	private TripleList possibilities;
+	private final TripleList possibilities;
 
-	private StatefulKnowledgeSession clueSession;
+	private final StatefulKnowledgeSession clueSession;
 
-	private KnowledgeBase clueRuleBase;
+	private final KnowledgeBase clueRuleBase;
 
 	public ClueSessionService() {
-		KnowledgeBuilderConfiguration config = KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration();
+		final KnowledgeBuilderConfiguration config = KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration();
 		config.setProperty("drools.dialect.mvel.strict", Boolean.FALSE.toString());
-		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(config);
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(config);
 
 		kbuilder.add(ResourceFactory.newClassPathResource("rules/EliminationRules.drl"), ResourceType.DRL);
 
@@ -34,29 +37,40 @@ public class ClueSessionService {
 		clueSession = clueRuleBase.newStatefulKnowledgeSession();
 		clueSession.addEventListener(new AfterActivationFiredEventListener());
 
-		TripleCreator creator = new TripleCreator();
+		final TripleCreator creator = new TripleCreator();
 
 		possibilities = creator.createAllTriples();
-		
+
 		clueSession.insert(possibilities);
 	}
-	
-	public void eliminateCard(Card card){
+
+	public void eliminateCard(final Card card) {
 		clueSession.insert(card);
 		clueSession.fireAllRules();
 	}
 
-	public void eliminateTriple(Triple triple){
+	public void eliminateTriple(final Triple triple) {
 		clueSession.insert(triple);
 		clueSession.fireAllRules();
-		
+
 	}
 
 	public StatefulKnowledgeSession getClueSession() {
 		return clueSession;
 	}
-	
+
 	public TripleList getPossibilities() {
 		return possibilities;
+	}
+
+	public List<Card> getRemainingCards() {
+		final ArrayList<Card> cards = new ArrayList<Card>();
+		for (final Object fact : clueSession.getFactHandles()) {
+			if (fact instanceof Card) {
+				cards.add((Card) fact);
+			}
+		}
+
+		return cards;
 	}
 }

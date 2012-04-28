@@ -8,17 +8,16 @@ import org.restlet.data.Protocol;
  * @author matt
  * 
  */
-public class ClueRestServer {
+public class ClueServer {
 
-	public static void main(final String args[]) {
+	public static void main(final String args[]) throws Exception {
 		final Component component = new Component();
 		component.getServers().add(Protocol.HTTP, 8080);
 		final Context childContext = component.getContext().createChildContext();
 
-		component.getDefaultHost().attach("/clue", new ClueService(childContext));
+		component.getDefaultHost().attach("/clue", new ClueRestService(childContext));
 		component.start();
-		while (true) {
-			Thread.sleep(10000);
-		}
+
+		Thread.currentThread().wait();
 	}
 }
