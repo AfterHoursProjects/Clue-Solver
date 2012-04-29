@@ -65,11 +65,6 @@ public class ClueSessionService {
 
 	public List<Card> getRemainingCards() {
 		final ArrayList<Card> cards = new ArrayList<Card>();
-		for (final Object fact : clueSession.getFactHandles()) {
-			if (fact instanceof Card) {
-				cards.add((Card) fact);
-			}
-		}
 
 		return cards;
 	}

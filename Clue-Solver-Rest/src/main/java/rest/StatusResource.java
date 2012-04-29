@@ -17,7 +17,8 @@ public class StatusResource extends ServerResource {
 		final ClueSessionService game = ClueGameFactory.getGameForUser("matt");
 
 		final ClueServerStatus status = new ClueServerStatus();
-		status.setRemainingTriples(game.getPossibilities().size());
+		status.setRemainingTriples(game.getPossibilities());
+		status.setRemainingCards(game.getRemainingCards());
 
 		return status;
 	}
