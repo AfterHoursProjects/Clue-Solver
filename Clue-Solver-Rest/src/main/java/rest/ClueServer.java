@@ -12,7 +12,7 @@ public class ClueServer {
 
 	public static void main(final String args[]) throws Exception {
 		final Component component = new Component();
-		component.getServers().add(Protocol.HTTP, 8080);
+		component.getServers().add(Protocol.HTTP, 1778);
 		final Context childContext = component.getContext().createChildContext();
 
 		component.getDefaultHost().attach("/clue", new ClueRestService(childContext));

@@ -14,12 +14,10 @@ import service.ClueSessionService;
 public class StatusResource extends ServerResource {
 	@Get("json|xml")
 	public ClueServerStatus status() {
-		final String userName = getClientInfo().getUser().getName();
-		final ClueSessionService game = ClueGameFactory.getGameForUser(userName);
+		final ClueSessionService game = ClueGameFactory.getGameForUser("matt");
 
 		final ClueServerStatus status = new ClueServerStatus();
 		status.setRemainingTriples(game.getPossibilities().size());
-		status.setRemainingCards(game.getRemainingCards());
 
 		return status;
 	}

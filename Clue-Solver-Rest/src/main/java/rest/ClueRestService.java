@@ -23,6 +23,6 @@ public class ClueRestService extends Application {
 		final Router router = new Router(getContext());
 		router.attach("/status", StatusResource.class);
 		router.attach("/cards", CardsResource.class);
-		return super.createInboundRoot();
+		return router;
 	}
 }
