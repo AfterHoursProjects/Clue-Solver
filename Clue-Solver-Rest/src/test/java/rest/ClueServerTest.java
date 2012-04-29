@@ -11,6 +11,7 @@ import org.restlet.Response;
 import org.restlet.data.Method;
 import org.restlet.data.Protocol;
 import org.restlet.data.Reference;
+import org.restlet.ext.jaxrs.JaxRsApplication;
 
 /**
  * @author matt
@@ -24,8 +25,12 @@ public class ClueServerTest {
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, 1778);
 		final Context childContext = component.getContext().createChildContext();
+		final JaxRsApplication application = new JaxRsApplication(childContext);
+		application.getTunnelService().setExtensionsTunnel(true);
+		application.getConverterService().setEnabled(true);
+		application.add(new ClueRestService());
 
-		component.getDefaultHost().attach("/clue", new ClueRestService(childContext));
+		component.getDefaultHost().attach("/clue", application);
 		component.start();
 	}
 

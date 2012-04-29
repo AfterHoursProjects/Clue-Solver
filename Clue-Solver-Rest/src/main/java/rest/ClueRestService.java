@@ -1,28 +1,24 @@
 package rest;
 
-import org.restlet.Application;
-import org.restlet.Context;
-import org.restlet.Restlet;
-import org.restlet.routing.Router;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.ws.rs.core.Application;
 
 /**
  * @author matt
  * 
  */
 public class ClueRestService extends Application {
-
-	public ClueRestService(final Context context) {
-		super(context);
-		getTunnelService().setEnabled(true);
-		getTunnelService().setExtensionsTunnel(true);
-		getConverterService().setEnabled(true);
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.ws.rs.core.Application#getClasses()
+	 */
 	@Override
-	public Restlet createInboundRoot() {
-		final Router router = new Router(getContext());
-		router.attach("/status", StatusResource.class);
-		router.attach("/cards", CardsResource.class);
-		return router;
+	public Set<Class<?>> getClasses() {
+		final Set<Class<?>> resources = new HashSet<Class<?>>();
+		resources.add(StatusResource.class);
+		return resources;
 	}
 }

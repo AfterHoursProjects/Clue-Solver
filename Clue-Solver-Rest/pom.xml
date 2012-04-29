@@ -11,6 +11,30 @@
 	<artifactId>Clue-Solver-Rest</artifactId>
 	<version>0.2-SNAPSHOT</version>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.enunciate</groupId>
+				<artifactId>maven-enunciate-plugin</artifactId>
+				<version>1.25</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>install-artifact</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.enunciate</groupId>
+						<artifactId>enunciate-amf</artifactId>
+						<version>1.25</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
 		<!-- Clue solver dependencies -->
 		<dependency>
@@ -35,7 +59,11 @@
 			<groupId>org.restlet.jse</groupId>
 			<artifactId>org.restlet.ext.xstream</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.restlet.jse</groupId>
+			<artifactId>org.restlet.ext.jaxrs</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
