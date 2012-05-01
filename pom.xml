@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>after.hours</groupId>
+	<artifactId>Clue-Solver</artifactId>
+	<version>0.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>ClueSolver</name>
+
+	<properties>
+		<restletVersion>2.0.13</restletVersion>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.drools</groupId>
+				<artifactId>drools-compiler</artifactId>
+				<version>5.4.0.CR1</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+			</dependency>
+			<dependency>
+				<groupId>after.hours</groupId>
+				<artifactId>Clue-Solver-Models</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>after.hours</groupId>
+				<artifactId>Clue-Solver-Rules</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet</artifactId>
+				<version>${restletVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.jackson</artifactId>
+				<version>${restletVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.xstream</artifactId>
+				<version>${restletVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.jaxrs</artifactId>
+				<version>${restletVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.crypto</artifactId>
+				<version>${restletVersion}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>maven-restlet</id>
+			<name>Public online Restlet repository</name>
+			<url>http://maven.restlet.org</url>
+		</repository>
+	</repositories>
+
+	<modules>
+		<module>Clue-Solver-Rules</module>
+		<module>Clue-Solver-Models</module>
+		<module>Clue-Solver-Rest</module>
+	</modules>
+</project>
