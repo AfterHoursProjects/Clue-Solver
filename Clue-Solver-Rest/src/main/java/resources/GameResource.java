@@ -1,5 +1,6 @@
 package resources;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,8 +16,13 @@ import service.ClueSessionService;
  * @author matt
  * 
  */
-@Path("status")
-public class StatusResource {
+@Path("game")
+public class GameResource {
+
+	@DELETE
+	public void resetGame(@Context final SecurityContext security) {
+		ClueGameFactory.resetGameForUser(security.getUserPrincipal().getName());
+	}
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })

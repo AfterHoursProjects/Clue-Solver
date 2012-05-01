@@ -80,6 +80,7 @@
 		<module>Clue-Solver-Models</module>
 		<module>Clue-Solver-Rest</module>
 	</modules>
+	
 	<build>
 		<plugins>
 			<plugin>
