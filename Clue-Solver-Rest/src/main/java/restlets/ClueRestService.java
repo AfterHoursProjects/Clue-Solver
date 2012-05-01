@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 import resources.CardsResource;
-import resources.StatusResource;
+import resources.GameResource;
 import resources.TriplesResource;
 
 /**
@@ -22,7 +22,7 @@ public class ClueRestService extends Application {
 	@Override
 	public Set<Class<?>> getClasses() {
 		final Set<Class<?>> resources = new HashSet<Class<?>>();
-		resources.add(StatusResource.class);
+		resources.add(GameResource.class);
 		resources.add(CardsResource.class);
 		resources.add(TriplesResource.class);
 		return resources;
