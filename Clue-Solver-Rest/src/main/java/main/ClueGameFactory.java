@@ -20,4 +20,8 @@ public class ClueGameFactory {
 		}
 		return game;
 	}
+
+	public static void resetGameForUser(final String name) {
+		currentGames.put(name, null);
+	}
 }
