@@ -6,7 +6,7 @@
 	<version>0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ClueSolver</name>
-	
+
 	<properties>
 		<restletVersion>2.0.13</restletVersion>
 	</properties>
@@ -52,6 +52,11 @@
 			<dependency>
 				<groupId>org.restlet.jse</groupId>
 				<artifactId>org.restlet.ext.jaxrs</artifactId>
+				<version>${restletVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.crypto</artifactId>
 				<version>${restletVersion}</version>
 			</dependency>
 		</dependencies>

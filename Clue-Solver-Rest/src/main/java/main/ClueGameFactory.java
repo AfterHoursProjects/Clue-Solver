@@ -1,4 +1,4 @@
-package rest;
+package main;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +16,7 @@ public class ClueGameFactory {
 		ClueSessionService game = currentGames.get(name);
 		if (game == null) {
 			game = new ClueSessionService();
+			currentGames.put(name, game);
 		}
 		return game;
 	}

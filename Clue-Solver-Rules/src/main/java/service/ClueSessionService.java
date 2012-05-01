@@ -1,8 +1,5 @@
 package service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import listeners.AfterActivationFiredEventListener;
 import model.Card;
 import model.Triple;
@@ -61,11 +58,5 @@ public class ClueSessionService {
 
 	public TripleList getPossibilities() {
 		return possibilities;
-	}
-
-	public List<Card> getRemainingCards() {
-		final ArrayList<Card> cards = new ArrayList<Card>();
-
-		return cards;
 	}
 }
