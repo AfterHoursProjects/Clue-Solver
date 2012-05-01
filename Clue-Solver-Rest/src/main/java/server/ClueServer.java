@@ -1,5 +1,7 @@
 package server;
 
+import java.util.Set;
+
 import org.restlet.Component;
 import org.restlet.Context;
 import org.restlet.Request;
@@ -12,12 +14,16 @@ import org.restlet.security.Verifier;
 
 import restlets.ClueRestService;
 
+import com.google.common.collect.ImmutableSet;
+
 /**
  * @author matt
  * 
  */
 public class ClueServer {
 	private final Component component;
+
+	private Set<String> authorizedUsers = ImmutableSet.of("matt", "bobby");
 
 	public ClueServer(final int port) {
 		component = new Component();
@@ -38,7 +44,7 @@ public class ClueServer {
 					return RESULT_MISSING;
 				}
 
-				if (!"matt".equals(request.getChallengeResponse().getIdentifier())) {
+				if (!authorizedUsers.contains((request.getChallengeResponse().getIdentifier()))) {
 					return RESULT_INVALID;
 				}
 				return RESULT_VALID;
