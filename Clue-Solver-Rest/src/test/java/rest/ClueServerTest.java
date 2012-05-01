@@ -1,5 +1,6 @@
 package rest;
 
+import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import model.Card;
 import model.Room;
@@ -9,6 +10,7 @@ import model.Weapon;
 import model.rest.ClueServerStatus;
 
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.restlet.Client;
@@ -68,6 +70,11 @@ public class ClueServerTest {
 		return response.getRemainingTriples().size();
 	}
 
+	@Before
+	public void resetForTest() {
+		resetGame();
+	}
+
 	private void resetGame() {
 		Reference reference = new Reference("http://localhost/clue/game");
 		reference.setHostPort(port);
@@ -75,8 +82,6 @@ public class ClueServerTest {
 		ClientResource resource = new ClientResource(reference);
 		resource.setProtocol(Protocol.HTTP);
 		resource.setChallengeResponse(getChallengeResponse());
-		resource.setMethod(Method.POST);
-
 		resource.delete();
 
 		assertEquals(324, getRemainingCount());
@@ -84,7 +89,6 @@ public class ClueServerTest {
 
 	@Test
 	public void testPutCard() throws Exception {
-		resetGame();
 		final Client client = new Client(Protocol.HTTP);
 		final Reference reference = new Reference("http://localhost/clue/cards");
 		reference.setHostPort(port);
@@ -102,7 +106,6 @@ public class ClueServerTest {
 
 	@Test
 	public void testPutTriple() throws Exception {
-		resetGame();
 		final Client client = new Client(Protocol.HTTP);
 		final Reference reference = new Reference("http://localhost/clue/triples");
 		reference.setHostPort(port);
@@ -130,14 +133,6 @@ public class ClueServerTest {
 		resource.setChallengeResponse(getChallengeResponse());
 
 		ClueServerStatus response = resource.get(ClueServerStatus.class);
-		System.out.println(response.getRemainingTriples().size());
-
-		// reference = new Reference("http://localhost/clue/status.json");
-		// reference.setHostPort(port);
-		// request = new Request(Method.GET, reference);
-		// request.setChallengeResponse(getChallengeResponse());
-		//
-		// response = client.handle(request);
-		// System.out.println(response.getEntityAsText());
+		assertNotNull(response);
 	}
 }
