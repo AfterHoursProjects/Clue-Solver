@@ -5,55 +5,40 @@ import model.Card;
 import model.Triple;
 import model.TripleList;
 
-import org.drools.KnowledgeBase;
-import org.drools.builder.KnowledgeBuilder;
-import org.drools.builder.KnowledgeBuilderConfiguration;
-import org.drools.builder.KnowledgeBuilderFactory;
-import org.drools.builder.ResourceType;
-import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 
 public class ClueSessionService {
 	private final TripleList possibilities;
-
 	private final StatefulKnowledgeSession clueSession;
-
-	private final KnowledgeBase clueRuleBase;
+	private static final ClueSessionFactory factory = new ClueSessionFactory();
+	
 
 	public ClueSessionService() {
-		final KnowledgeBuilderConfiguration config = KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration();
-		config.setProperty("drools.dialect.mvel.strict", Boolean.FALSE.toString());
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(config);
-
-		kbuilder.add(ResourceFactory.newClassPathResource("rules/EliminationRules.drl"), ResourceType.DRL);
-
-		if (kbuilder.hasErrors()) {
-			throw new RuntimeException(kbuilder.getErrors().toString());
-		}
-		clueRuleBase = kbuilder.newKnowledgeBase();
-		clueSession = clueRuleBase.newStatefulKnowledgeSession();
+		clueSession = factory.getNewSession();
+		
 		clueSession.addEventListener(new AfterActivationFiredEventListener());
-
 		final TripleCreator creator = new TripleCreator();
-
 		possibilities = creator.createAllTriples();
-
 		clueSession.insert(possibilities);
 	}
 
+	/**
+	 * Inserts a new card into the drools facts
+	 * @param card {@link Card} to insert
+	 */
 	public void eliminateCard(final Card card) {
 		clueSession.insert(card);
 		clueSession.fireAllRules();
 	}
 
+	/**
+	 * Inserts a new triple into our facts
+	 * @param triple {@link Triple} to insert
+	 */
 	public void eliminateTriple(final Triple triple) {
 		clueSession.insert(triple);
 		clueSession.fireAllRules();
 
-	}
-
-	public StatefulKnowledgeSession getClueSession() {
-		return clueSession;
 	}
 
 	public TripleList getPossibilities() {
