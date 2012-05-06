@@ -5,11 +5,29 @@
 		<artifactId>Clue-Solver</artifactId>
 		<groupId>after.hours</groupId>
 		<version>0.2-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>after.hours</groupId>
 	<artifactId>Clue-Solver-Rest</artifactId>
-	<version>0.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.enunciate</groupId>
+				<artifactId>maven-enunciate-plugin</artifactId>
+				<version>1.25</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>docs</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 
 	<dependencies>
 		<!-- Clue solver dependencies -->

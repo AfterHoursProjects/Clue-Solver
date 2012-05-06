@@ -52,7 +52,6 @@ public class ClueServerTest {
 
 	private ChallengeResponse getChallengeResponse() {
 		final ChallengeResponse response = new ChallengeResponse(ChallengeScheme.HTTP_DIGEST);
-		response.setRealm("clueRealm");
 		response.setIdentifier("matt");
 		response.setSecret("abc");
 		return response;

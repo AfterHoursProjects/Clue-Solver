@@ -60,6 +60,11 @@
 				<version>${restletVersion}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.jaxb</artifactId>
+				<version>${restletVersion}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>12.0</version>
@@ -80,7 +85,7 @@
 		<module>Clue-Solver-Models</module>
 		<module>Clue-Solver-Rest</module>
 	</modules>
-	
+
 	<build>
 		<plugins>
 			<plugin>

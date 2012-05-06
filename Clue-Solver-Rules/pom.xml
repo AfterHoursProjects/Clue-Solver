@@ -6,9 +6,8 @@
 		<groupId>after.hours</groupId>
 		<version>0.2-SNAPSHOT</version>
 	</parent>
-	<groupId>after.hours</groupId>
+	
 	<artifactId>Clue-Solver-Rules</artifactId>
-	<version>0.2-SNAPSHOT</version>
 
 	<dependencies>
 		<dependency>

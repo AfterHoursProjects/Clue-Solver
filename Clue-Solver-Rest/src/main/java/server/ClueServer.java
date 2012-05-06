@@ -2,19 +2,25 @@ package server;
 
 import java.util.Set;
 
+import model.rest.ClueServerStatus;
+
 import org.restlet.Component;
 import org.restlet.Context;
 import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Protocol;
+import org.restlet.engine.Engine;
 import org.restlet.ext.jaxrs.JaxRsApplication;
+import org.restlet.ext.xstream.XstreamConverter;
+import org.restlet.ext.xstream.XstreamRepresentation;
 import org.restlet.security.ChallengeAuthenticator;
 import org.restlet.security.Verifier;
 
 import restlets.ClueRestService;
 
 import com.google.common.collect.ImmutableSet;
+import com.thoughtworks.xstream.XStream;
 
 /**
  * @author matt
@@ -22,9 +28,8 @@ import com.google.common.collect.ImmutableSet;
  */
 public class ClueServer {
 	private final Component component;
-
 	private Set<String> authorizedUsers = ImmutableSet.of("matt", "bobby");
-
+	
 	public ClueServer(final int port) {
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
@@ -35,7 +40,7 @@ public class ClueServer {
 		application.add(new ClueRestService());
 
 		final ChallengeAuthenticator authenticator = new ChallengeAuthenticator(application.getContext(),
-				ChallengeScheme.HTTP_DIGEST, "clueRealm");
+				ChallengeScheme.HTTP_BASIC, null);
 		authenticator.setVerifier(new Verifier() {
 
 			@Override
