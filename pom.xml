@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>after.hours</groupId>
 	<artifactId>Clue-Solver</artifactId>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ClueSolver</name>
 
@@ -46,7 +46,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.restlet.jse</groupId>
-				<artifactId>org.restlet.ext.xstream</artifactId>
+				<artifactId>org.restlet.ext.jaxb</artifactId>
 				<version>${restletVersion}</version>
 			</dependency>
 			<dependency>
@@ -56,7 +56,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.restlet.jse</groupId>
-				<artifactId>org.restlet.ext.crypto</artifactId>
+				<artifactId>org.restlet.ext.jaxb</artifactId>
 				<version>${restletVersion}</version>
 			</dependency>
 			<dependency>
@@ -80,7 +80,7 @@
 		<module>Clue-Solver-Models</module>
 		<module>Clue-Solver-Rest</module>
 	</modules>
-	
+
 	<build>
 		<plugins>
 			<plugin>
