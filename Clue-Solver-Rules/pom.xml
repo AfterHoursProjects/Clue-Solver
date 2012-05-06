@@ -4,10 +4,11 @@
 	<parent>
 		<artifactId>Clue-Solver</artifactId>
 		<groupId>after.hours</groupId>
-		<version>0.2-SNAPSHOT</version>
+		<version>0.3-SNAPSHOT</version>
 	</parent>
 	
 	<artifactId>Clue-Solver-Rules</artifactId>
+	<name>Clue Solver Rules Engine</name>
 
 	<dependencies>
 		<dependency>

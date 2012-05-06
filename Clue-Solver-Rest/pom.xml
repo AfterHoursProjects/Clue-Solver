@@ -4,11 +4,12 @@
 	<parent>
 		<artifactId>Clue-Solver</artifactId>
 		<groupId>after.hours</groupId>
-		<version>0.2-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<version>0.3-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>Clue-Solver-Rest</artifactId>
+	<name>Clue Solver Rest API</name>
+	<description>API for interacting with a drools based clue solver</description>
 	<packaging>jar</packaging>
 
 	<build>
