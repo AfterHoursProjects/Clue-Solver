@@ -46,17 +46,12 @@
 			</dependency>
 			<dependency>
 				<groupId>org.restlet.jse</groupId>
-				<artifactId>org.restlet.ext.xstream</artifactId>
+				<artifactId>org.restlet.ext.jaxb</artifactId>
 				<version>${restletVersion}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.restlet.jse</groupId>
 				<artifactId>org.restlet.ext.jaxrs</artifactId>
-				<version>${restletVersion}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.restlet.jse</groupId>
-				<artifactId>org.restlet.ext.crypto</artifactId>
 				<version>${restletVersion}</version>
 			</dependency>
 			<dependency>

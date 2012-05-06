@@ -1,0 +1,8 @@
+<enunciate xmlns="http://enunciate.codehaus.org/schemas/enunciate-1.25"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.25 http://enunciate.codehaus.org/schemas/enunciate-1.25.xsd">
+	
+	<services>
+		<rest defaultRestSubcontext="/clue"></rest>
+	</services>
+</enunciate>

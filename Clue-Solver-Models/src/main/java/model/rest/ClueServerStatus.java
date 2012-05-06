@@ -2,7 +2,6 @@ package model.rest;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,7 +22,8 @@ public class ClueServerStatus {
 	 * @return the remainingCards
 	 * @see Card
 	 */
-	@XmlElement(name="cards", required=false)
+	@XmlElementWrapper
+	@XmlElement(name="card")
 	public List<Card> getRemainingCards() {
 		return remainingCards;
 	}
@@ -32,7 +32,7 @@ public class ClueServerStatus {
 	 * @return the remainingTriples
 	 * @see Triple
 	 */
-	@XmlElementWrapper(name="triples", required=true, nillable=false)
+	@XmlElementWrapper
 	@XmlElement(name="triple")
 	public List<Triple> getRemainingTriples() {
 		return remainingTriples;

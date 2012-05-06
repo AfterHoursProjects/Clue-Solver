@@ -1,6 +1,5 @@
 package model;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import enums.RoomEnum;
@@ -39,7 +38,6 @@ public class Triple {
 	 * @return The {@link Room}
 	 * @see RoomEnum 
 	 */
-	@XmlElement(name="room")
 	public Room getRoom() {
 		return room;
 	}
@@ -48,7 +46,6 @@ public class Triple {
 	 * @return the {@link Suspect}
 	 * @see SuspectEnum
 	 */
-	@XmlElement(name="suspect")
 	public Suspect getSuspect() {
 		return suspect;
 	}
@@ -57,7 +54,6 @@ public class Triple {
 	 * @return the {@link Weapon}
 	 * @see WeaponEnum
 	 */
-	@XmlElement(name="weapon")
 	public Weapon getWeapon() {
 		return weapon;
 	}

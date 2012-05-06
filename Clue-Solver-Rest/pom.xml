@@ -13,6 +13,8 @@
 
 	<build>
 		<plugins>
+			<!-- Enunciate plugin is used to generate api docs -->
+			<!-- Generates to default location target/site/wsdocs -->
 			<plugin>
 				<groupId>org.codehaus.enunciate</groupId>
 				<artifactId>maven-enunciate-plugin</artifactId>
@@ -24,6 +26,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<configFile>${basedir}/enunciate/enunciate.xml</configFile>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -51,17 +56,14 @@
 		</dependency>
 		<dependency>
 			<groupId>org.restlet.jse</groupId>
-			<artifactId>org.restlet.ext.xstream</artifactId>
+			<artifactId>org.restlet.ext.jaxb</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.restlet.jse</groupId>
 			<artifactId>org.restlet.ext.jaxrs</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.restlet.jse</groupId>
-			<artifactId>org.restlet.ext.crypto</artifactId>
-		</dependency>
 
+		<!-- Other dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
