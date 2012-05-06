@@ -3,6 +3,7 @@ package restlets;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.jws.WebService;
 import javax.ws.rs.core.Application;
 
 import resources.CardsResource;
