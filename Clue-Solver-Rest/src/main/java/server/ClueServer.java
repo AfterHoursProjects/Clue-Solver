@@ -22,9 +22,8 @@ import com.google.common.collect.ImmutableSet;
  */
 public class ClueServer {
 	private final Component component;
-
 	private Set<String> authorizedUsers = ImmutableSet.of("matt", "bobby");
-
+	
 	public ClueServer(final int port) {
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
@@ -35,7 +34,7 @@ public class ClueServer {
 		application.add(new ClueRestService());
 
 		final ChallengeAuthenticator authenticator = new ChallengeAuthenticator(application.getContext(),
-				ChallengeScheme.HTTP_DIGEST, "clueRealm");
+				ChallengeScheme.HTTP_BASIC, null);
 		authenticator.setVerifier(new Verifier() {
 
 			@Override

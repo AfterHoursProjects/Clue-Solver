@@ -1,5 +1,16 @@
 package model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import enums.RoomEnum;
+import enums.SuspectEnum;
+import enums.WeaponEnum;
+
+/**
+ * This model represents a full triple in clue, this will include the {@link Suspect}, {@link Weapon}, and the {@link Room}.
+ * In the end it will be set of three {@link Card}s
+ */
+@XmlRootElement(name="triple")
 public class Triple {
 	private Suspect suspect;
 	private Weapon weapon;
@@ -23,26 +34,50 @@ public class Triple {
 		weapon = new Weapon(weaponName);
 	}
 
+	/**
+	 * @return The {@link Room}
+	 * @see RoomEnum 
+	 */
 	public Room getRoom() {
 		return room;
 	}
 
+	/**
+	 * @return the {@link Suspect}
+	 * @see SuspectEnum
+	 */
 	public Suspect getSuspect() {
 		return suspect;
 	}
 
+	/**
+	 * @return the {@link Weapon}
+	 * @see WeaponEnum
+	 */
 	public Weapon getWeapon() {
 		return weapon;
 	}
 
+	/**
+	 * @param room the {@link Room} this triple is representing
+	 * @see RoomEnum 
+	 */
 	public void setRoom(final Room room) {
 		this.room = room;
 	}
 
+	/**
+	 * @param room the {@link Suspect} this triple is representing
+	 * @see SuspectEnum
+	 */
 	public void setSuspect(final Suspect suspect) {
 		this.suspect = suspect;
 	}
 
+	/**
+	 * @param room the {@link Weapon} this triple is representing
+	 * @see WeaponEnum
+	 */
 	public void setWeapon(final Weapon weapon) {
 		this.weapon = weapon;
 	}
