@@ -12,7 +12,7 @@
 	<description>API for interacting with a drools based clue solver</description>
 	<packaging>jar</packaging>
 
-	<build>
+	<reporting>
 		<plugins>
 			<!-- Enunciate plugin is used to generate api docs -->
 			<!-- Generates to default location target/site/wsdocs -->
@@ -20,19 +20,13 @@
 				<groupId>org.codehaus.enunciate</groupId>
 				<artifactId>maven-enunciate-plugin</artifactId>
 				<version>1.25</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>docs</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
 					<configFile>${basedir}/enunciate/enunciate.xml</configFile>
+					<docsSubdir>wsdocs</docsSubdir>
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>
+	</reporting>
 
 
 	<dependencies>
