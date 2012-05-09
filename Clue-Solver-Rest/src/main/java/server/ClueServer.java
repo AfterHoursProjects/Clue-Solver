@@ -27,7 +27,9 @@ public class ClueServer {
 	public ClueServer(final int port) {
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
+		
 		final Context childContext = component.getContext().createChildContext();
+		
 		final JaxRsApplication application = new JaxRsApplication(childContext);
 		application.getTunnelService().setExtensionsTunnel(true);
 		application.getConverterService().setEnabled(true);

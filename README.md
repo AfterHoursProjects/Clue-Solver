@@ -1,5 +1,6 @@
 Clue-Solver
 ===========
+See [Project Site][Project Site] for reports and api
 
 Build Instructions
 ------------------
@@ -52,3 +53,4 @@ The site is full navigable from the html in the target directory, does not need 
 [Restlet Site]: http://www.restlet.org/ "Restlet Home Page"
 [Jackson Site]: http://jackson.codehaus.org/Home "Jackson Home Page"
 [Enunciate Site]: http://enunciate.codehaus.org/ "Enunciate"
+[Project Site]: http://mcclellanmj.github.com/Clue-Solver "Project Site"
