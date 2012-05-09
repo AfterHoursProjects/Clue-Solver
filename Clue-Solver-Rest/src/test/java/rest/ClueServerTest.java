@@ -66,6 +66,7 @@ public class ClueServerTest {
 		resource.setChallengeResponse(getChallengeResponse());
 
 		ClueServerStatus response = resource.get(ClueServerStatus.class);
+		resource.release();
 		return response.getRemainingTriples().size();
 	}
 
@@ -82,24 +83,23 @@ public class ClueServerTest {
 		resource.setProtocol(Protocol.HTTP);
 		resource.setChallengeResponse(getChallengeResponse());
 		resource.delete();
+		resource.release();
 
 		assertEquals(324, getRemainingCount());
 	}
 
 	@Test
 	public void testPutCard() throws Exception {
-		final Client client = new Client(Protocol.HTTP);
 		final Reference reference = new Reference("http://localhost/clue/cards");
 		reference.setHostPort(port);
-		final Request request = new Request(Method.PUT, reference);
-		request.setChallengeResponse(getChallengeResponse());
-
+		
+		ClientResource client = new ClientResource(reference);
+		client.setChallengeResponse(getChallengeResponse());
+		
 		final Card card = WeaponEnum.LEADPIPE.getWeapon();
-
-		request.setEntity(new JacksonRepresentation<Card>(card));
-		System.out.println(request.getEntityAsText());
-		client.handle(request);
-
+		client.put(new JacksonRepresentation<Card>(card));
+		client.release();
+		
 		assertEquals(270, getRemainingCount());
 	}
 
@@ -108,6 +108,7 @@ public class ClueServerTest {
 		final Client client = new Client(Protocol.HTTP);
 		final Reference reference = new Reference("http://localhost/clue/triples");
 		reference.setHostPort(port);
+		
 		final Request request = new Request(Method.PUT, reference);
 		request.setChallengeResponse(getChallengeResponse());
 
@@ -130,8 +131,10 @@ public class ClueServerTest {
 		ClientResource resource = new ClientResource(reference);
 		resource.setProtocol(Protocol.HTTP);
 		resource.setChallengeResponse(getChallengeResponse());
-
+		
 		ClueServerStatus response = resource.get(ClueServerStatus.class);
+		resource.release();
+		
 		assertNotNull(response);
 	}
 }
