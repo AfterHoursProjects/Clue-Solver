@@ -11,7 +11,7 @@ public class ConsoleControl {
 	
 	
 	public ConsoleControl(InputStream in, InputListener listener) {
-		InputStreamReader converter = new InputStreamReader(System.in);
+		InputStreamReader converter = new InputStreamReader(in);
 		this.in = new BufferedReader(converter);
 		this.listener = listener;
 	}
@@ -19,6 +19,8 @@ public class ConsoleControl {
 
 
 	public void listenForInput() throws IOException {
-		while(listener.lineRead(in.readLine()) == false);
+		while(listener.lineRead(in.readLine()) == false) {
+			// Do nothing, just keep reading lines
+		}
 	}
 }
