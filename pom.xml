@@ -13,13 +13,6 @@
 		<encoding>UTF-8</encoding>
 	</properties>
 	
-	<distributionManagement>
-		<site>
-			<id>fs site</id>
-			<url>file:///Users/matt/Workspaces/Eclipse3.7/Clue-Solver-Site</url>
-		</site>
-	</distributionManagement>
-
 	<reporting>
 		<plugins>
 			<plugin>
@@ -36,6 +29,7 @@
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
+					<threshold>low</threshold>
 					<xmlOutput>true</xmlOutput>
 				</configuration>
 			</plugin>
@@ -53,7 +47,6 @@
 				<configuration>
 					<aggregate>true</aggregate>
 					<targetJdk>${jdkVersion}</targetJdk>
-					<aggregate>true</aggregate>
 					<sourceEncoding>${encoding}</sourceEncoding>
 				</configuration>
 			</plugin>
