@@ -12,7 +12,7 @@
 		<jdkVersion>1.6</jdkVersion>
 		<encoding>UTF-8</encoding>
 	</properties>
-	
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -74,6 +74,15 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
 				<version>2.5.1</version>
+				<configuration>
+					<aggregate>true</aggregate>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>taglist-maven-plugin</artifactId>
+				<version>2.4</version>
 				<configuration>
 					<aggregate>true</aggregate>
 				</configuration>
