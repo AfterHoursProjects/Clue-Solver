@@ -19,7 +19,12 @@ public class RestModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(EventBus.class).toInstance(new EventBus());
+		
+		// This binding is used to set the port number, could be modified to something that
+		// read an external config file, command line argument, jvm argument, etc
 		bind(Integer.class).annotatedWith(Names.named("serverPort")).toInstance(1234);
+		
+		// Binds the ClueServer class to the ClueServer builder
 		bind(ClueServer.class).toProvider(ClueServerProvider.class).in(Scopes.SINGLETON);
 	}
 

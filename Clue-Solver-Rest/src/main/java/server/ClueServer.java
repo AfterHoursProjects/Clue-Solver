@@ -30,6 +30,8 @@ public class ClueServer {
 	private EventBus eventBus;
 
 	public ClueServer(final int port, final EventBus eventBus) {
+		this.eventBus = eventBus;
+		
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
 

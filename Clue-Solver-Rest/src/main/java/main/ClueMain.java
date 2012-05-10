@@ -10,6 +10,7 @@ import dependency.injection.RestModule;
 import events.ServerSignals;
 
 /**
+ * See {@link RestModule} for port and server configuration
  * @author matt
  * 
  */
