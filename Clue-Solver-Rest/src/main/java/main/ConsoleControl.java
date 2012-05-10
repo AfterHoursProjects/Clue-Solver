@@ -6,24 +6,24 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class ConsoleControl {
-	private BufferedReader in;
-	private InputListener listener;
-	
-	
+	private final BufferedReader in;
+	private final InputListener listener;
+
 	public ConsoleControl(InputStream in, InputListener listener) {
-		InputStreamReader converter = new InputStreamReader(in);
+		final InputStreamReader converter = new InputStreamReader(in);
 		this.in = new BufferedReader(converter);
 		this.listener = listener;
 	}
 
 	/**
-	 * Spins listening for input, once a whole line is read it gets passed on to the
-	 * listeners {@link InputListener#lineRead(String)} method
+	 * Spins listening for input, once a whole line is read it gets passed on to the listeners
+	 * {@link InputListener#lineRead(String)} method
 	 * 
-	 * @throws IOException an exception occurs while reading from the input stream 
-	 * used to construct this instance
+	 * @throws IOException
+	 *             an exception occurs while reading from the input stream used to construct this instance
 	 */
 	public void listenForInput() throws IOException {
-		while(listener.lineRead(in.readLine()) == false) {}
+		while (listener.lineRead(in.readLine()) == false) {
+		}
 	}
 }

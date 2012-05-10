@@ -9,9 +9,10 @@ import com.google.inject.Scopes;
 import com.google.inject.name.Names;
 
 /**
- * Guice module for setting up dependencies.  Think of it as a spring context just done in Java code
+ * Guice module for setting up dependencies. Think of it as a spring context just done in Java code
+ * 
  * @author matt
- *
+ * 
  */
 public class RestModule extends AbstractModule {
 

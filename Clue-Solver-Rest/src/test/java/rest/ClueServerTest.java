@@ -23,14 +23,14 @@ import org.restlet.data.Reference;
 import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.resource.ClientResource;
 
+import server.ClueServer;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.util.Modules;
 
 import dependency.injection.RestModule;
 import dependency.injection.TestModule;
-
-import server.ClueServer;
 import enums.RoomEnum;
 import enums.SuspectEnum;
 import enums.WeaponEnum;
@@ -45,8 +45,8 @@ public class ClueServerTest {
 
 	@BeforeClass
 	public static void startTestServer() throws Exception {
-		Injector injector = Guice.createInjector(Modules.override(new RestModule()).with(new TestModule()));
-		server = injector.getInstance(ClueServer.class); 
+		final Injector injector = Guice.createInjector(Modules.override(new RestModule()).with(new TestModule()));
+		server = injector.getInstance(ClueServer.class);
 		server.start();
 
 	}
@@ -64,14 +64,14 @@ public class ClueServerTest {
 	}
 
 	private int getRemainingCount() {
-		Reference reference = new Reference("http://localhost/clue/game.json");
+		final Reference reference = new Reference("http://localhost/clue/game.json");
 		reference.setHostPort(port);
 
-		ClientResource resource = new ClientResource(reference);
+		final ClientResource resource = new ClientResource(reference);
 		resource.setProtocol(Protocol.HTTP);
 		resource.setChallengeResponse(getChallengeResponse());
 
-		ClueServerStatus response = resource.get(ClueServerStatus.class);
+		final ClueServerStatus response = resource.get(ClueServerStatus.class);
 		resource.release();
 		return response.getRemainingTriples().size();
 	}
@@ -82,10 +82,10 @@ public class ClueServerTest {
 	}
 
 	private void resetGame() {
-		Reference reference = new Reference("http://localhost/clue/game");
+		final Reference reference = new Reference("http://localhost/clue/game");
 		reference.setHostPort(port);
 
-		ClientResource resource = new ClientResource(reference);
+		final ClientResource resource = new ClientResource(reference);
 		resource.setProtocol(Protocol.HTTP);
 		resource.setChallengeResponse(getChallengeResponse());
 		resource.delete();
@@ -98,14 +98,14 @@ public class ClueServerTest {
 	public void testPutCard() throws Exception {
 		final Reference reference = new Reference("http://localhost/clue/cards");
 		reference.setHostPort(port);
-		
-		ClientResource client = new ClientResource(reference);
+
+		final ClientResource client = new ClientResource(reference);
 		client.setChallengeResponse(getChallengeResponse());
-		
+
 		final Card card = WeaponEnum.LEADPIPE.getWeapon();
 		client.put(new JacksonRepresentation<Card>(card));
 		client.release();
-		
+
 		assertEquals(270, getRemainingCount());
 	}
 
@@ -114,7 +114,7 @@ public class ClueServerTest {
 		final Client client = new Client(Protocol.HTTP);
 		final Reference reference = new Reference("http://localhost/clue/triples");
 		reference.setHostPort(port);
-		
+
 		final Request request = new Request(Method.PUT, reference);
 		request.setChallengeResponse(getChallengeResponse());
 
@@ -131,16 +131,16 @@ public class ClueServerTest {
 
 	@Test
 	public void testServerGetStatus() throws Exception {
-		Reference reference = new Reference("http://localhost/clue/game.xml");
+		final Reference reference = new Reference("http://localhost/clue/game.xml");
 		reference.setHostPort(port);
 
-		ClientResource resource = new ClientResource(reference);
+		final ClientResource resource = new ClientResource(reference);
 		resource.setProtocol(Protocol.HTTP);
 		resource.setChallengeResponse(getChallengeResponse());
-		
-		ClueServerStatus response = resource.get(ClueServerStatus.class);
+
+		final ClueServerStatus response = resource.get(ClueServerStatus.class);
 		resource.release();
-		
+
 		assertNotNull(response);
 	}
 }

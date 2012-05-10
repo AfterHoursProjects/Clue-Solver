@@ -26,25 +26,15 @@ import events.ServerSignals;
  */
 public class ClueServer {
 	private final Component component;
-	private Set<String> authorizedUsers = ImmutableSet.of("matt", "bobby");
-	private EventBus eventBus; 
-	
-	@Subscribe
-	public void onStop(ServerSignals.StopSignal signal) {
-		try {
-			eventBus.unregister(this);
-			this.stop();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+	private final Set<String> authorizedUsers = ImmutableSet.of("matt", "bobby");
+	private EventBus eventBus;
+
 	public ClueServer(final int port, final EventBus eventBus) {
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
-		
+
 		final Context childContext = component.getContext().createChildContext();
-		
+
 		final JaxRsApplication application = new JaxRsApplication(childContext);
 		application.getTunnelService().setExtensionsTunnel(true);
 		application.getConverterService().setEnabled(true);
@@ -69,6 +59,16 @@ public class ClueServer {
 		application.setGuard(authenticator);
 
 		component.getDefaultHost().attach("/clue", application);
+	}
+
+	@Subscribe
+	public void onStop(ServerSignals.StopSignal signal) {
+		try {
+			eventBus.unregister(this);
+			this.stop();
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void start() throws Exception {

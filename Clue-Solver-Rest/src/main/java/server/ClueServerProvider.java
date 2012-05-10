@@ -8,7 +8,7 @@ import com.google.inject.name.Named;
 public class ClueServerProvider implements Provider<ClueServer> {
 	private final Integer port;
 	private final EventBus eventBus;
-	
+
 	@Inject
 	public ClueServerProvider(@Named("serverPort") Integer port, EventBus eventBus) {
 		this.port = port;
@@ -17,7 +17,7 @@ public class ClueServerProvider implements Provider<ClueServer> {
 
 	@Override
 	public ClueServer get() {
-		ClueServer server = new ClueServer(port, eventBus);
+		final ClueServer server = new ClueServer(port, eventBus);
 		eventBus.register(server);
 		return server;
 	}

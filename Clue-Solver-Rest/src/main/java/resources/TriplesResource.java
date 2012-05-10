@@ -12,8 +12,9 @@ import model.Triple;
 import service.ClueSessionService;
 
 /**
- * Api resources for interacting with triples, currently its only function is to allow insertion of a triple which will eliminate it from
- * the possible triples that would win
+ * Api resources for interacting with triples, currently its only function is to allow insertion of a triple which will
+ * eliminate it from the possible triples that would win
+ * 
  * @author matt
  * 
  */
@@ -24,7 +25,9 @@ public class TriplesResource {
 
 	/**
 	 * Put a {@link Triple} into the game session
-	 * @param toInsert The triple that is to be inserted, this can be either JSON or XML
+	 * 
+	 * @param toInsert
+	 *            The triple that is to be inserted, this can be either JSON or XML
 	 */
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
