@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
-	<classpathentry kind="src" path="Clue-Solver-Rest"/>
-	<classpathentry kind="src" path="Clue-Solver-Models"/>
-	<classpathentry kind="src" path="Clue-Solver-Rules"/>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources"/>
-	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
