@@ -15,6 +15,10 @@ import org.restlet.security.Verifier;
 import restlets.ClueRestService;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+
+import events.ServerSignals;
 
 /**
  * @author matt
@@ -23,8 +27,19 @@ import com.google.common.collect.ImmutableSet;
 public class ClueServer {
 	private final Component component;
 	private Set<String> authorizedUsers = ImmutableSet.of("matt", "bobby");
+	private EventBus eventBus; 
 	
-	public ClueServer(final int port) {
+	@Subscribe
+	public void onStop(ServerSignals.StopSignal signal) {
+		try {
+			eventBus.unregister(this);
+			this.stop();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ClueServer(final int port, final EventBus eventBus) {
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
 		

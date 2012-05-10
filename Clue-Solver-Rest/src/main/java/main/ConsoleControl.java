@@ -16,11 +16,14 @@ public class ConsoleControl {
 		this.listener = listener;
 	}
 
-
-
+	/**
+	 * Spins listening for input, once a whole line is read it gets passed on to the
+	 * listeners {@link InputListener#lineRead(String)} method
+	 * 
+	 * @throws IOException an exception occurs while reading from the input stream 
+	 * used to construct this instance
+	 */
 	public void listenForInput() throws IOException {
-		while(listener.lineRead(in.readLine()) == false) {
-			// Do nothing, just keep reading lines
-		}
+		while(listener.lineRead(in.readLine()) == false) {}
 	}
 }

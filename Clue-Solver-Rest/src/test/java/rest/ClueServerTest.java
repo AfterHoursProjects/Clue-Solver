@@ -23,6 +23,13 @@ import org.restlet.data.Reference;
 import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.resource.ClientResource;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.util.Modules;
+
+import dependency.injection.RestModule;
+import dependency.injection.TestModule;
+
 import server.ClueServer;
 import enums.RoomEnum;
 import enums.SuspectEnum;
@@ -38,15 +45,14 @@ public class ClueServerTest {
 
 	@BeforeClass
 	public static void startTestServer() throws Exception {
-		server = new ClueServer(port.intValue());
+		Injector injector = Guice.createInjector(Modules.override(new RestModule()).with(new TestModule()));
+		server = injector.getInstance(ClueServer.class); 
 		server.start();
 
 	}
 
 	@AfterClass
 	public static void stopTestServer() throws Exception {
-		// Wait for all output to finish
-		System.out.flush();
 		server.stop();
 	}
 
