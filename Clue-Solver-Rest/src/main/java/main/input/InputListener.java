@@ -1,8 +1,8 @@
-package main;
+package main.input;
 
 public interface InputListener {
 	/**
-	 * Called everytime a line is read from the input stream
+	 * Method to call when a line is read from the console
 	 * 
 	 * @return return a true to stop the controller, return false to keep the controller going
 	 */

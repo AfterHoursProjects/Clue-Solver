@@ -1,5 +1,7 @@
 package dependency.injection;
 
+import org.junit.Ignore;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 
@@ -9,6 +11,7 @@ import com.google.inject.name.Names;
  * @author matt
  * 
  */
+@Ignore("Not a test, overrides dependency inject")
 public class TestModule extends AbstractModule {
 
 	@Override

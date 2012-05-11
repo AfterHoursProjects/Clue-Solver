@@ -11,12 +11,14 @@ import org.restlet.data.Protocol;
 import org.restlet.ext.jaxrs.JaxRsApplication;
 import org.restlet.security.ChallengeAuthenticator;
 import org.restlet.security.Verifier;
+import org.restlet.service.TaskService;
 
 import restlets.ClueRestService;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.google.inject.Inject;
 
 import events.ServerSignals;
 
@@ -29,15 +31,18 @@ public class ClueServer {
 	private final Set<String> authorizedUsers = ImmutableSet.of("matt", "bobby");
 	private EventBus eventBus;
 
-	public ClueServer(final int port, final EventBus eventBus) {
+	@Inject
+	public ClueServer(final int port, final EventBus eventBus, final TaskService taskService) {
 		this.eventBus = eventBus;
-		
+		eventBus.register(this);
+
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
 
 		final Context childContext = component.getContext().createChildContext();
 
 		final JaxRsApplication application = new JaxRsApplication(childContext);
+		application.setTaskService(taskService);
 		application.getTunnelService().setExtensionsTunnel(true);
 		application.getConverterService().setEnabled(true);
 		application.add(new ClueRestService());
@@ -55,6 +60,7 @@ public class ClueServer {
 				if (!authorizedUsers.contains((request.getChallengeResponse().getIdentifier()))) {
 					return RESULT_INVALID;
 				}
+
 				return RESULT_VALID;
 			}
 		});
