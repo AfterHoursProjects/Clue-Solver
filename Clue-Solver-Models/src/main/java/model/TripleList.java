@@ -13,4 +13,8 @@ public class TripleList extends ArrayList<Triple>{
 	public void addTriple(Room room, Suspect suspect, Weapon weapon){
 		this.add(new Triple(room,suspect,weapon));
 	}
+	
+	public int getSize() {
+		return super.size();
+	}
 }
