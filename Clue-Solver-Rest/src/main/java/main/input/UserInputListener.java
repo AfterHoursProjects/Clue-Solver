@@ -15,7 +15,7 @@ public class UserInputListener implements InputListener {
 
 	public boolean lineRead(String input) {
 		// Check for user input of quit
-		if ("quit".equals(input)) {
+		if ("quit".equalsIgnoreCase(input)) {
 			try {
 				// Post an event to the event bus
 				eventBus.post(ServerSignals.getStopSignal());
