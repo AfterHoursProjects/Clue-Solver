@@ -31,14 +31,14 @@ public class ClueSessionServiceTest {
 		service.eliminateTriple(triple);
 		assertEquals(Integer.valueOf(323).intValue(), service.getPossibilities().size());
 	}
-	
+
 	@Test
 	public void testMultipleEliminations() {
 		Triple triple = new Triple(RoomEnum.CONSERVATORY.getRoom(), SuspectEnum.MUSTARD.getSuspect(),
 				WeaponEnum.REVOLVER.getWeapon());
 		ClueSessionService service = new ClueSessionService();
 		service.eliminateTriple(triple);
-		
+
 		triple = new Triple(RoomEnum.HALL.getRoom(), SuspectEnum.SCARLET.getSuspect(),
 				WeaponEnum.CANDLESTICK.getWeapon());
 		service.eliminateTriple(triple);
