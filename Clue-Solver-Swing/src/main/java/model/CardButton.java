@@ -32,6 +32,7 @@ public class CardButton extends JButton {
 
 				client.put(new JacksonRepresentation<Card>(card));
 
+				client.release();
 				parent.dispose();
 			}
 		});
