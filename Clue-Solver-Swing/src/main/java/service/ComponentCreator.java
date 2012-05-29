@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,6 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import model.CardButton;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
+
 import enums.RoomEnum;
 import enums.SuspectEnum;
 import enums.WeaponEnum;
@@ -37,24 +42,12 @@ public class ComponentCreator {
 	public ComponentCreator() {
 	}
 
-	public JButton getRegularButton(String buttonTitle, final JFrame parent) {
-		JButton button = new JButton(buttonTitle);
-		button.setPreferredSize(new Dimension(regularButtonWidth, regularButtonHeight));
-		button.addActionListener(new ActionListener() {
+	public JPanel getBorderPanel() {
+		JPanel panel = new JPanel();
+		BorderLayout layout = new BorderLayout();
+		panel.setLayout(layout);
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				parent.dispose();
-			}
-		});
-		return button;
-	}
-
-	public JButton getEliminateButton(String buttonTitle) {
-		JButton button = new JButton(buttonTitle);
-		button.setPreferredSize(new Dimension(eliminateWidth, eliminateHeight));
-
-		return button;
+		return panel;
 	}
 
 	public CardButton[] getButtons(String buttonType, final JFrame parent) {
@@ -88,35 +81,18 @@ public class ComponentCreator {
 		return buttons;
 	}
 
-	public JRadioButton[] getRadioButtons(String radioButtonType) {
-		String[] buttonTitles;
-
-		if (radioButtonType.equals("rooms"))
-			buttonTitles = RoomEnum.getStringValues();
-		else if (radioButtonType.equals("suspects"))
-			buttonTitles = SuspectEnum.getStringValues();
-		else if (radioButtonType.equals("weapons"))
-			buttonTitles = WeaponEnum.getStringValues();
-		else {
-			JOptionPane.showMessageDialog(null, "Invalid Card Type!");
-			buttonTitles = new String[1];
-		}
-
-		JRadioButton[] radiobuttons = new JRadioButton[buttonTitles.length];
-
-		for (int i = 0; i < radiobuttons.length; i++) {
-			radiobuttons[i] = new JRadioButton(componentManipulator.uppercaseFirstLetters(buttonTitles[i]));
-			radiobuttons[i].setPreferredSize(new Dimension(eliminateTripleWidth, eliminateTripleHeight));
-		}
-
-		return radiobuttons;
-	}
-
 	public JComboBox getComboBox() {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setPreferredSize(new Dimension(comboBoxWidth, comboBoxHeight));
 
 		return comboBox;
+	}
+
+	public JButton getEliminateButton(String buttonTitle) {
+		JButton button = new JButton(buttonTitle);
+		button.setPreferredSize(new Dimension(eliminateWidth, eliminateHeight));
+
+		return button;
 	}
 
 	public JPanel getFlowPanel() {
@@ -127,19 +103,47 @@ public class ComponentCreator {
 		return panel;
 	}
 
+	public Iterable<JRadioButton> getRadioButtons(String radioButtonType) {
+		Iterable<String> buttonTitles = null;
+		Collection<JRadioButton> buttons = Lists.newArrayList();
+
+		if (radioButtonType.equals("rooms")) {
+			buttonTitles = RoomEnum.getStringValues();
+		} else if (radioButtonType.equals("suspects")) {
+			buttonTitles = SuspectEnum.getStringValues();
+		} else if (radioButtonType.equals("weapons")) {
+			buttonTitles = WeaponEnum.getStringValues();
+		}
+
+		Preconditions.checkNotNull(buttonTitles);
+
+		for (String buttonTitle : buttonTitles) {
+			JRadioButton button = new JRadioButton(componentManipulator.uppercaseFirstLetters(buttonTitle));
+			button.setPreferredSize(new Dimension(eliminateTripleWidth, eliminateTripleHeight));
+			buttons.add(button);
+		}
+
+		return buttons;
+	}
+
+	public JButton getRegularButton(String buttonTitle, final JFrame parent) {
+		JButton button = new JButton(buttonTitle);
+		button.setPreferredSize(new Dimension(regularButtonWidth, regularButtonHeight));
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				parent.dispose();
+			}
+		});
+		return button;
+	}
+
 	public JPanel getTitledFlowPanel(String panelTitle) {
 		JPanel panel = new JPanel();
 		FlowLayout layout = new FlowLayout();
 		panel.setLayout(layout);
 		panel.setBorder(BorderFactory.createTitledBorder(panelTitle));
-
-		return panel;
-	}
-
-	public JPanel getBorderPanel() {
-		JPanel panel = new JPanel();
-		BorderLayout layout = new BorderLayout();
-		panel.setLayout(layout);
 
 		return panel;
 	}

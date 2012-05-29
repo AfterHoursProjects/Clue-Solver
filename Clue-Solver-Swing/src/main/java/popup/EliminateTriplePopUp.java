@@ -26,37 +26,90 @@ import org.restlet.data.Reference;
 import org.restlet.ext.jackson.JacksonRepresentation;
 
 import service.ComponentCreator;
+
+import com.google.common.collect.Iterables;
+
 import enums.RoomEnum;
 import enums.SuspectEnum;
 import enums.WeaponEnum;
 
 public class EliminateTriplePopUp extends JFrame {
+	private class RadioButtonHandler implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			int i = 0;
+			int j = 0;
+			int k = 0;
+			JRadioButton roomRadioButton = null;
+			JRadioButton suspectRadioButton = null;
+			JRadioButton weaponRadioButton = null;
+
+			if (event.getSource() == submitButton) {
+				for (JRadioButton room : roomRadioButtons) {
+					if (room.isSelected()) {
+						roomRadioButton = room;
+					}
+				}
+
+				for (JRadioButton weapon : weaponRadioButtons) {
+					if (weapon.isSelected()) {
+						weaponRadioButton = weapon;
+					}
+				}
+
+				for (JRadioButton suspect : suspectRadioButtons) {
+					if (suspect.isSelected()) {
+						suspectRadioButton = suspect;
+					}
+				}
+
+				final Client client = new Client(Protocol.HTTP);
+				final Reference reference = new Reference("http://localhost/clue/triples");
+				reference.setHostPort(port);
+				final Request request = new Request(Method.PUT, reference);
+				request.setChallengeResponse(getChallengeResponse());
+
+				final Weapon weapon = WeaponEnum.valueOf(weaponRadioButton.getText()).getWeapon();
+				final Suspect suspect = SuspectEnum.valueOf(suspectRadioButton.getText()).getSuspect();
+				final Room room = RoomEnum.valueOf(roomRadioButton.getText()).getRoom();
+
+				request.setEntity(new JacksonRepresentation<Triple>(new Triple(room, suspect, weapon)));
+				System.out.println(request.getEntityAsText());
+				client.handle(request);
+			}
+
+			if (event.getSource() == cancelButton) {
+
+			}
+		}
+	}
+
 	private static final long serialVersionUID = -1646585226250634393L;
 
 	private ComponentCreator componentCreator;
-
 	private FlowLayout eliminateTripleLayout;
-	private FlowLayout allRadioButtonsLayout;
 
+	private FlowLayout allRadioButtonsLayout;
 	private ButtonGroup roomButtonGroup;
 	private ButtonGroup suspectButtonGroup;
-	private ButtonGroup weaponButtonGroup;
 
-	private JRadioButton[] roomRadioButtons;
-	private JRadioButton[] suspectRadioButtons;
-	private JRadioButton[] weaponRadioButtons;
+	private ButtonGroup weaponButtonGroup;
+	private Iterable<JRadioButton> roomRadioButtons;
+	private Iterable<JRadioButton> suspectRadioButtons;
+	private Iterable<JRadioButton> weaponRadioButtons;
 
 	private JButton submitButton;
-	private JButton cancelButton;
 
+	private JButton cancelButton;
 	private JPanel allRadioButtonsPanel;
 	private JPanel roomRadioButtonsPanel;
 	private JPanel suspectRadioButtonsPanel;
 	private JPanel weaponRadioButtonsPanel;
+
 	private JPanel buttonPanel;
 
 	private RadioButtonHandler handler;
-
 	private int roomRadioButtonsPanelWidth;
 	private int roomRadioButtonsPanelHeight;
 	private int suspectRadioButtonsPanelWidth;
@@ -64,6 +117,7 @@ public class EliminateTriplePopUp extends JFrame {
 	private int weaponRadioButtonsPanelWidth;
 	private int weaponRadioButtonsPanelHeight;
 	private int allRadioButtonsPanelWidth;
+
 	private int allRadioButtonsPanelHeight;
 
 	private static final Integer port = Integer.valueOf(1234);
@@ -89,35 +143,33 @@ public class EliminateTriplePopUp extends JFrame {
 		roomRadioButtonsPanel.setPreferredSize(new Dimension(roomRadioButtonsPanelWidth, roomRadioButtonsPanelHeight));
 		roomButtonGroup = new ButtonGroup();
 		roomRadioButtons = componentCreator.getRadioButtons("rooms");
-		roomRadioButtons[0].setSelected(true);
+		Iterables.getFirst(roomRadioButtons, null).setSelected(true);
 
-		for (int i = 0; i < roomRadioButtons.length; i++) {
-			roomButtonGroup.add(roomRadioButtons[i]);
-			roomRadioButtonsPanel.add(roomRadioButtons[i]);
+		for (JRadioButton roomRadioButton : roomRadioButtons) {
+			roomButtonGroup.add(roomRadioButton);
+			roomRadioButtonsPanel.add(roomRadioButton);
 		}
 
 		suspectRadioButtonsPanel = componentCreator.getTitledFlowPanel("Suspects");
-		suspectRadioButtonsPanel.setPreferredSize(new Dimension(suspectRadioButtonsPanelWidth,
-				suspectRadioButtonsPanelHeight));
+		suspectRadioButtonsPanel.setPreferredSize(new Dimension(suspectRadioButtonsPanelWidth, suspectRadioButtonsPanelHeight));
 		suspectButtonGroup = new ButtonGroup();
 		suspectRadioButtons = componentCreator.getRadioButtons("suspects");
-		suspectRadioButtons[0].setSelected(true);
+		Iterables.getFirst(suspectRadioButtons, null).setSelected(true);
 
-		for (int i = 0; i < suspectRadioButtons.length; i++) {
-			suspectButtonGroup.add(suspectRadioButtons[i]);
-			suspectRadioButtonsPanel.add(suspectRadioButtons[i]);
+		for (JRadioButton suspectRadioButton : suspectRadioButtons) {
+			suspectButtonGroup.add(suspectRadioButton);
+			suspectRadioButtonsPanel.add(suspectRadioButton);
 		}
 
 		weaponRadioButtonsPanel = componentCreator.getTitledFlowPanel("Weapons");
-		weaponRadioButtonsPanel.setPreferredSize(new Dimension(weaponRadioButtonsPanelWidth,
-				weaponRadioButtonsPanelHeight));
+		weaponRadioButtonsPanel.setPreferredSize(new Dimension(weaponRadioButtonsPanelWidth, weaponRadioButtonsPanelHeight));
 		weaponButtonGroup = new ButtonGroup();
 		weaponRadioButtons = componentCreator.getRadioButtons("weapons");
-		weaponRadioButtons[0].setSelected(true);
+		Iterables.getFirst(weaponRadioButtons, null).setSelected(true);
 
-		for (int i = 0; i < weaponRadioButtons.length; i++) {
-			weaponButtonGroup.add(weaponRadioButtons[i]);
-			weaponRadioButtonsPanel.add(weaponRadioButtons[i]);
+		for (JRadioButton weaponRadioButton : weaponRadioButtons) {
+			weaponButtonGroup.add(weaponRadioButton);
+			weaponRadioButtonsPanel.add(weaponRadioButton);
 		}
 
 		allRadioButtonsPanel = new JPanel();
@@ -143,75 +195,8 @@ public class EliminateTriplePopUp extends JFrame {
 		submitButton.addActionListener(handler);
 		cancelButton.addActionListener(handler);
 
-		for (int i = 0; i < roomRadioButtons.length; i++) {
-			roomRadioButtons[i].addActionListener(handler);
-		}
-
-		for (int i = 0; i < suspectRadioButtons.length; i++) {
-			suspectRadioButtons[i].addActionListener(handler);
-		}
-
-		for (int i = 0; i < weaponRadioButtons.length; i++) {
-			weaponRadioButtons[i].addActionListener(handler);
-		}
-	}
-
-	private class RadioButtonHandler implements ActionListener {
-
-		public void actionPerformed(ActionEvent event) {
-			int i = 0;
-			int j = 0;
-			int k = 0;
-			JRadioButton roomRadioButton = null;
-			JRadioButton suspectRadioButton = null;
-			JRadioButton weaponRadioButton = null;
-
-			if (event.getSource() == submitButton) {
-				while (i < roomRadioButtons.length) {
-					if (roomRadioButtons[i].isSelected()) {
-						roomRadioButton = roomRadioButtons[i];
-						i = roomRadioButtons.length;
-					}
-
-					i++;
-				}
-
-				while (j < suspectRadioButtons.length) {
-					if (suspectRadioButtons[j].isSelected()) {
-						suspectRadioButton = suspectRadioButtons[j];
-						j = suspectRadioButtons.length;
-					}
-
-					j++;
-				}
-
-				while (k < weaponRadioButtons.length) {
-					if (weaponRadioButtons[k].isSelected()) {
-						weaponRadioButton = weaponRadioButtons[k];
-						k = weaponRadioButtons.length;
-					}
-
-					k++;
-				}
-
-				final Client client = new Client(Protocol.HTTP);
-				final Reference reference = new Reference("http://localhost/clue/triples");
-				reference.setHostPort(port);
-				final Request request = new Request(Method.PUT, reference);
-				request.setChallengeResponse(getChallengeResponse());
-
-				final Weapon weapon = WeaponEnum.valueOf(weaponRadioButton.getText()).getWeapon();
-				final Suspect suspect = SuspectEnum.valueOf(suspectRadioButton.getText()).getSuspect();
-				final Room room = RoomEnum.valueOf(roomRadioButton.getText()).getRoom();
-
-				request.setEntity(new JacksonRepresentation<Triple>(new Triple(room, suspect, weapon)));
-				System.out.println(request.getEntityAsText());
-				client.handle(request);
-			}
-
-			if (event.getSource() == cancelButton) {
-
-			}
+		for (JRadioButton button : Iterables.concat(roomRadioButtons, suspectRadioButtons, weaponRadioButtons)) {
+			button.addActionListener(handler);
 		}
 	}
 
