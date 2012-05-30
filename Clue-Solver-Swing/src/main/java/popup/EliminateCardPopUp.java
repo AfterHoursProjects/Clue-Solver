@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import main.ClueSolverGUI;
 import model.CardButton;
 import service.ComponentCreator;
 
@@ -37,9 +38,12 @@ public class EliminateCardPopUp extends JFrame {
 	private int allCardsPanelWidth;
 	private int allCardsPanelHeight;
 
-	public EliminateCardPopUp() {
+	ClueSolverGUI parent;
+
+	public EliminateCardPopUp(ClueSolverGUI parent) {
 		super("Eliminate Card");
 
+		this.parent = parent;
 		componentCreator = new ComponentCreator();
 
 		eliminateCardLayout = new FlowLayout();

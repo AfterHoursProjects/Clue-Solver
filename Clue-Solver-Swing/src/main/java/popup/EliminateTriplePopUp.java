@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import main.ClueSolverGUI;
 import model.Room;
 import model.Suspect;
 import model.Triple;
@@ -122,7 +123,7 @@ public class EliminateTriplePopUp extends JFrame {
 
 	private static final Integer port = Integer.valueOf(1234);
 
-	public EliminateTriplePopUp() {
+	public EliminateTriplePopUp(ClueSolverGUI parent) {
 		super("Eliminate Triple");
 
 		componentCreator = new ComponentCreator();
