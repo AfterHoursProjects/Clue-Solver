@@ -19,14 +19,13 @@ import model.Weapon;
 
 import org.restlet.Client;
 import org.restlet.Request;
-import org.restlet.data.ChallengeResponse;
-import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Method;
 import org.restlet.data.Protocol;
 import org.restlet.data.Reference;
 import org.restlet.ext.jackson.JacksonRepresentation;
 
 import service.ComponentCreator;
+import service.ServerService;
 
 import com.google.common.collect.Iterables;
 
@@ -37,11 +36,14 @@ import enums.WeaponEnum;
 public class EliminateTriplePopUp extends JFrame {
 	private class RadioButtonHandler implements ActionListener {
 
+		ClueSolverGUI parent;
+
+		RadioButtonHandler(ClueSolverGUI parent) {
+			this.parent = parent;
+		}
+
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			int i = 0;
-			int j = 0;
-			int k = 0;
 			JRadioButton roomRadioButton = null;
 			JRadioButton suspectRadioButton = null;
 			JRadioButton weaponRadioButton = null;
@@ -67,9 +69,9 @@ public class EliminateTriplePopUp extends JFrame {
 
 				final Client client = new Client(Protocol.HTTP);
 				final Reference reference = new Reference("http://localhost/clue/triples");
-				reference.setHostPort(port);
+				reference.setHostPort(ServerService.getPort());
 				final Request request = new Request(Method.PUT, reference);
-				request.setChallengeResponse(getChallengeResponse());
+				request.setChallengeResponse(ServerService.getChallengeResponse());
 
 				final Weapon weapon = WeaponEnum.valueOf(weaponRadioButton.getText()).getWeapon();
 				final Suspect suspect = SuspectEnum.valueOf(suspectRadioButton.getText()).getSuspect();
@@ -78,6 +80,8 @@ public class EliminateTriplePopUp extends JFrame {
 				request.setEntity(new JacksonRepresentation<Triple>(new Triple(room, suspect, weapon)));
 				System.out.println(request.getEntityAsText());
 				client.handle(request);
+
+				parent.updateRemainingTriples();
 			}
 
 			if (event.getSource() == cancelButton) {
@@ -121,8 +125,6 @@ public class EliminateTriplePopUp extends JFrame {
 
 	private int allRadioButtonsPanelHeight;
 
-	private static final Integer port = Integer.valueOf(1234);
-
 	public EliminateTriplePopUp(ClueSolverGUI parent) {
 		super("Eliminate Triple");
 
@@ -152,7 +154,8 @@ public class EliminateTriplePopUp extends JFrame {
 		}
 
 		suspectRadioButtonsPanel = componentCreator.getTitledFlowPanel("Suspects");
-		suspectRadioButtonsPanel.setPreferredSize(new Dimension(suspectRadioButtonsPanelWidth, suspectRadioButtonsPanelHeight));
+		suspectRadioButtonsPanel.setPreferredSize(new Dimension(suspectRadioButtonsPanelWidth,
+				suspectRadioButtonsPanelHeight));
 		suspectButtonGroup = new ButtonGroup();
 		suspectRadioButtons = componentCreator.getRadioButtons("suspects");
 		Iterables.getFirst(suspectRadioButtons, null).setSelected(true);
@@ -163,7 +166,8 @@ public class EliminateTriplePopUp extends JFrame {
 		}
 
 		weaponRadioButtonsPanel = componentCreator.getTitledFlowPanel("Weapons");
-		weaponRadioButtonsPanel.setPreferredSize(new Dimension(weaponRadioButtonsPanelWidth, weaponRadioButtonsPanelHeight));
+		weaponRadioButtonsPanel.setPreferredSize(new Dimension(weaponRadioButtonsPanelWidth,
+				weaponRadioButtonsPanelHeight));
 		weaponButtonGroup = new ButtonGroup();
 		weaponRadioButtons = componentCreator.getRadioButtons("weapons");
 		Iterables.getFirst(weaponRadioButtons, null).setSelected(true);
@@ -191,7 +195,7 @@ public class EliminateTriplePopUp extends JFrame {
 		add(allRadioButtonsPanel);
 		add(buttonPanel);
 
-		handler = new RadioButtonHandler();
+		handler = new RadioButtonHandler(parent);
 
 		submitButton.addActionListener(handler);
 		cancelButton.addActionListener(handler);
@@ -199,12 +203,5 @@ public class EliminateTriplePopUp extends JFrame {
 		for (JRadioButton button : Iterables.concat(roomRadioButtons, suspectRadioButtons, weaponRadioButtons)) {
 			button.addActionListener(handler);
 		}
-	}
-
-	private ChallengeResponse getChallengeResponse() {
-		final ChallengeResponse response = new ChallengeResponse(ChallengeScheme.HTTP_BASIC);
-		response.setIdentifier("bobby");
-		response.setSecret("abc");
-		return response;
 	}
 }

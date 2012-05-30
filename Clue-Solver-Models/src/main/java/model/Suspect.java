@@ -16,4 +16,5 @@ public class Suspect extends Card {
 		this.type = CardTypes.SUSPECT.name();
 		this.name = name;
 	}
+	
 }

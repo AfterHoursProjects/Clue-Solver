@@ -7,10 +7,10 @@ import enums.SuspectEnum;
 import enums.WeaponEnum;
 
 /**
- * This model represents a full triple in clue, this will include the {@link Suspect}, {@link Weapon}, and the {@link Room}.
- * In the end it will be set of three {@link Card}s
+ * This model represents a full triple in clue, this will include the {@link Suspect}, {@link Weapon}, and the
+ * {@link Room}. In the end it will be set of three {@link Card}s
  */
-@XmlRootElement(name="triple")
+@XmlRootElement(name = "triple")
 public class Triple {
 	private Suspect suspect;
 	private Weapon weapon;
@@ -36,7 +36,7 @@ public class Triple {
 
 	/**
 	 * @return The {@link Room}
-	 * @see RoomEnum 
+	 * @see RoomEnum
 	 */
 	public Room getRoom() {
 		return room;
@@ -59,15 +59,17 @@ public class Triple {
 	}
 
 	/**
-	 * @param room the {@link Room} this triple is representing
-	 * @see RoomEnum 
+	 * @param room
+	 *            the {@link Room} this triple is representing
+	 * @see RoomEnum
 	 */
 	public void setRoom(final Room room) {
 		this.room = room;
 	}
 
 	/**
-	 * @param room the {@link Suspect} this triple is representing
+	 * @param room
+	 *            the {@link Suspect} this triple is representing
 	 * @see SuspectEnum
 	 */
 	public void setSuspect(final Suspect suspect) {
@@ -75,11 +77,17 @@ public class Triple {
 	}
 
 	/**
-	 * @param room the {@link Weapon} this triple is representing
+	 * @param room
+	 *            the {@link Weapon} this triple is representing
 	 * @see WeaponEnum
 	 */
 	public void setWeapon(final Weapon weapon) {
 		this.weapon = weapon;
+	}
+
+	public String toString() {
+		return new StringBuilder().append(weapon.toString()).append(" - ").append(room.toString()).append(" - ")
+				.append(suspect.toString()).toString();
 	}
 
 }

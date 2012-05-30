@@ -7,10 +7,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import enums.CardTypes;
 
-@XmlRootElement(name="card")
+@XmlRootElement(name = "card")
 public class Card implements Serializable {
 	private static final long serialVersionUID = 2331477538254078635L;
-	
+
 	protected String type;
 	protected String name;
 
@@ -47,18 +47,20 @@ public class Card implements Serializable {
 
 	/**
 	 * Gets the name of the cards, IE peacock..
+	 * 
 	 * @return the name of the card
 	 */
-	@XmlAttribute(name="name")
+	@XmlAttribute(name = "name")
 	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Gets the type of the cards see {@link CardTypes} for valid types
+	 * 
 	 * @return the type of the card
 	 */
-	@XmlAttribute(name="type")
+	@XmlAttribute(name = "type")
 	public String getType() {
 		return type;
 	}
@@ -83,6 +85,10 @@ public class Card implements Serializable {
 
 	public void setType(final String type) {
 		this.type = type;
+	}
+
+	public String toString() {
+		return this.name;
 	}
 
 }

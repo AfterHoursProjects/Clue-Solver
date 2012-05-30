@@ -6,20 +6,21 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.Triple;
+import model.rest.ClueServerStatus;
+
 import org.restlet.data.Protocol;
 import org.restlet.data.Reference;
 import org.restlet.resource.ClientResource;
 
-import model.Triple;
-import model.rest.ClueServerStatus;
 import popup.EliminateCardPopUp;
 import popup.EliminateTriplePopUp;
 import service.ComponentCreator;
@@ -78,7 +79,7 @@ public class ClueSolverGUI extends JFrame {
 		remainingPanel.add(remainingComboBox);
 
 		buttonPanel = componentCreator.getFlowPanel();
-		//TODO: create classes for these and remove using a string to get the right button
+		// TODO: create classes for these and remove using a string to get the right button
 		eliminateCardButton = componentCreator.getEliminateButton(" ELIMINATE CARD ");
 		eliminateTripleButton = componentCreator.getEliminateButton(" ELIMINATE TRIPLE ");
 		buttonPanel.add(eliminateCardButton);
@@ -87,7 +88,7 @@ public class ClueSolverGUI extends JFrame {
 		add(remainingPanel, BorderLayout.NORTH);
 		add(buttonPanel, BorderLayout.CENTER);
 
-		//TODO: remove button handler and move logic to classes created for buttons.
+		// TODO: remove button handler and move logic to classes created for buttons.
 		handler = new ButtonHandler(this);
 		eliminateCardButton.addActionListener(handler);
 		eliminateTripleButton.addActionListener(handler);
@@ -96,9 +97,11 @@ public class ClueSolverGUI extends JFrame {
 
 	private class ButtonHandler implements ActionListener {
 		ClueSolverGUI parent;
-		public ButtonHandler(ClueSolverGUI parent){
-			this.parent=parent;
+
+		public ButtonHandler(ClueSolverGUI parent) {
+			this.parent = parent;
 		}
+
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == eliminateCardButton) {
 				EliminateCardPopUp eliminateCardPopUp = new EliminateCardPopUp(parent);
@@ -123,12 +126,16 @@ public class ClueSolverGUI extends JFrame {
 			}
 		}
 	}
-	
+
+	//TODO: Find a better way than removing all then re-adding them
 	public void updateRemainingTriples() {
-		this.remainingComboBox = new JComboBox<Triple>(getRemaningTriples());
+		this.remainingComboBox.removeAllItems();
+		for (Triple triple : getRemaningTriples()) {
+			this.remainingComboBox.addItem(triple);
+		}
 	}
 
-	private Triple[] getRemaningTriples() {
+	private List<Triple> getRemaningTriples() {
 		final Reference reference = new Reference("http://localhost/clue/game.json");
 		reference.setHostPort(ServerService.getPort());
 
@@ -138,7 +145,7 @@ public class ClueSolverGUI extends JFrame {
 
 		final ClueServerStatus response = resource.get(ClueServerStatus.class);
 		resource.release();
-		
-		return response.getRemainingTriples().toArray(new Triple[0]);
+
+		return response.getRemainingTriples();
 	}
 }

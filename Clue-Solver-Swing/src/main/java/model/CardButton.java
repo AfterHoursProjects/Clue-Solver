@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
 import org.restlet.data.Reference;
 import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.resource.ClientResource;
 
+import popup.EliminateCardPopUp;
 import service.ServerService;
 
 public class CardButton extends JButton {
@@ -17,7 +17,7 @@ public class CardButton extends JButton {
 	private static final long serialVersionUID = -1781960193283468886L;
 	private Card card;
 
-	public CardButton(final Card card, final JFrame parent) {
+	public CardButton(final Card card, final EliminateCardPopUp parent) {
 		super(card.name);
 		this.card = card;
 		addActionListener(new ActionListener() {
@@ -33,6 +33,7 @@ public class CardButton extends JButton {
 				client.put(new JacksonRepresentation<Card>(card));
 
 				client.release();
+				parent.getParent().updateRemainingTriples();
 				parent.dispose();
 			}
 		});

@@ -40,6 +40,10 @@ public class EliminateCardPopUp extends JFrame {
 
 	ClueSolverGUI parent;
 
+	public ClueSolverGUI getParent() {
+		return parent;
+	}
+
 	public EliminateCardPopUp(ClueSolverGUI parent) {
 		super("Eliminate Card");
 

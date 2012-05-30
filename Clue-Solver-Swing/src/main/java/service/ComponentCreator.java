@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import model.CardButton;
+import popup.EliminateCardPopUp;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -50,7 +51,7 @@ public class ComponentCreator {
 		return panel;
 	}
 
-	public CardButton[] getButtons(String buttonType, final JFrame parent) {
+	public CardButton[] getButtons(String buttonType, final EliminateCardPopUp parent) {
 		CardButton[] buttons = null;
 		if (buttonType.equals("rooms")) {
 			buttons = new CardButton[RoomEnum.values().length];
