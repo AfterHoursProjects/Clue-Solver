@@ -1,14 +1,12 @@
 package service.probability;
 
-import java.util.List;
-
+import model.ProbabilityReport;
 import model.TripleList;
-import model.rest.CardCounts;
 
 public class ProbabilityCalculatorImpl implements ProbabilityCalculator {
 
 	@Override
-	public List<CardCounts> getProbabilities(TripleList triples) {
+	public ProbabilityReport generateProbabilityReport(TripleList triples) {
 		// TODO Auto-generated method stub
 		return null;
 	}
