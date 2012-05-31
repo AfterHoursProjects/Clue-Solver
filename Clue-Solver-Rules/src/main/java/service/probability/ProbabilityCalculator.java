@@ -1,9 +1,7 @@
 package service.probability;
 
-import java.util.List;
-
+import model.ProbabilityReport;
 import model.TripleList;
-import model.rest.CardCounts;
 
 /**
  * Calculation services for probability
@@ -13,11 +11,11 @@ import model.rest.CardCounts;
  */
 public interface ProbabilityCalculator {
 	/**
-	 * Calculates the probabilities using the list of triples. Will go through and count each of them to find the totals
+	 * Generates a report of that can be used to find probabilities
 	 * 
 	 * @param triples
 	 *            List of triples to calculate
-	 * @return an {@link Iterable} of all cards found and their counts
+	 * @return a report that can be used to display and review the results of the calculation
 	 */
-	public List<CardCounts> getProbabilities(final TripleList triples);
+	public ProbabilityReport generateProbabilityReport(TripleList triples);
 }
