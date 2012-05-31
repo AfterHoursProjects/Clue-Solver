@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -15,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Triple;
-import model.rest.ClueServerStatus;
+import model.TripleList;
 
 import org.restlet.data.Protocol;
 import org.restlet.data.Reference;
@@ -24,16 +23,12 @@ import org.restlet.resource.ClientResource;
 import popup.EliminateCardPopUp;
 import popup.EliminateTriplePopUp;
 import service.ComponentCreator;
-import service.ComponentManipulator;
 import service.ServerService;
 
 public class ClueSolverGUI extends JFrame {
 	private static final long serialVersionUID = -6289692480071914521L;
 	private ComponentCreator componentCreator;
-	private ComponentManipulator componentManipulator;
-
 	private BorderLayout clueSolverLayout;
-	private FlowLayout buttonLayout;
 
 	private JButton eliminateCardButton;
 	private JButton eliminateTripleButton;
@@ -130,22 +125,23 @@ public class ClueSolverGUI extends JFrame {
 	//TODO: Find a better way than removing all then re-adding them
 	public void updateRemainingTriples() {
 		this.remainingComboBox.removeAllItems();
-		for (Triple triple : getRemaningTriples()) {
+		for (Triple triple : getRemainingTriples()) {
 			this.remainingComboBox.addItem(triple);
 		}
 	}
 
-	private List<Triple> getRemaningTriples() {
-		final Reference reference = new Reference("http://localhost/clue/game.json");
+	private List<Triple> getRemainingTriples() {
+		final Reference reference = new Reference("http://localhost/clue/triples/remaining.json");
 		reference.setHostPort(ServerService.getPort());
 
 		final ClientResource resource = new ClientResource(reference);
 		resource.setProtocol(Protocol.HTTP);
 		resource.setChallengeResponse(ServerService.getChallengeResponse());
 
-		final ClueServerStatus response = resource.get(ClueServerStatus.class);
+		final TripleList response = resource.get(TripleList.class);
 		resource.release();
 
-		return response.getRemainingTriples();
+		return response;
 	}
+	
 }

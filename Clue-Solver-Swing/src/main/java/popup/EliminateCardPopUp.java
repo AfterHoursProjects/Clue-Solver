@@ -56,9 +56,9 @@ public class EliminateCardPopUp extends JFrame {
 		roomCardsPanelWidth = 160;
 		roomCardsPanelHeight = 305;
 		suspectCardsPanelWidth = 160;
-		suspectCardsPanelHeight = 215;
+		suspectCardsPanelHeight = 245;
 		weaponCardsPanelWidth = 160;
-		weaponCardsPanelHeight = 215;
+		weaponCardsPanelHeight = 245;
 		allCardsPanelWidth = 520;
 		allCardsPanelHeight = 360;
 

@@ -6,6 +6,7 @@ import model.Card;
 import model.Room;
 import model.Suspect;
 import model.Triple;
+import model.TripleList;
 import model.Weapon;
 import model.rest.ClueServerStatus;
 
@@ -142,5 +143,21 @@ public class ClueServerTest {
 		resource.release();
 
 		assertNotNull(response);
+	}
+	
+	@Test
+	public void testRemainingTriples() {
+		final Reference reference = new Reference("http://localhost/clue/triples/remaining.json");
+		reference.setHostPort(port);
+		
+		final ClientResource resource = new ClientResource(reference);
+		resource.setProtocol(Protocol.HTTP);
+		resource.setChallengeResponse(getChallengeResponse());
+		
+		final TripleList response = resource.get(TripleList.class);
+		resource.release();
+		
+		assertNotNull(response);
+		assertEquals(324, response.size());
 	}
 }
