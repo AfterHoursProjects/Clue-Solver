@@ -1,11 +1,14 @@
 package service.probability;
 
-import java.util.List;
+import java.util.Collection;
 
-import model.ProbabilityCardReport;
+import model.CardCount;
 import model.ProbabilityReport;
+import model.Room;
+import model.Suspect;
 import model.Triple;
 import model.TripleList;
+import model.Weapon;
 
 import org.junit.Test;
 
@@ -24,7 +27,9 @@ public class ProbabilityCalculatorTest {
 		Triple mostLikely = report.getMostLikelyTriple();
 
 		// TODO: Test overall report
-		List<ProbabilityCardReport> cardReport = report.getCardsWithProbability();
+		Collection<CardCount<Weapon>> weaponReport = report.getWeaponCounts();
+		Collection<CardCount<Room>> roomReport = report.getRoomCounts();
+		Collection<CardCount<Suspect>> suspectReport = report.getSuspectCounts();
 	}
 
 }

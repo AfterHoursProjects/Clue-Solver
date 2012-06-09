@@ -6,7 +6,7 @@
 		<groupId>after.hours</groupId>
 		<version>0.3-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>Clue-Solver-Rules</artifactId>
 	<name>Clue Solver Rules Engine</name>
 
@@ -23,6 +23,10 @@
 		<dependency>
 			<groupId>after.hours</groupId>
 			<artifactId>Clue-Solver-Models</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
 		</dependency>
 	</dependencies>
 </project>
