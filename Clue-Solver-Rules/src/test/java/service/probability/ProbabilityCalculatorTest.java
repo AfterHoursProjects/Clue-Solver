@@ -1,35 +1,33 @@
 package service.probability;
 
-import java.util.Collection;
-
-import model.CardCount;
+import static org.junit.Assert.assertEquals;
+import model.Probability;
 import model.ProbabilityReport;
-import model.Room;
-import model.Suspect;
 import model.Triple;
 import model.TripleList;
-import model.Weapon;
 
 import org.junit.Test;
 
-public class ProbabilityCalculatorTest {
-	private TripleList generateTriples() {
-		// TODO stubby
-		return null;
-	}
+import enums.RoomEnum;
+import enums.SuspectEnum;
+import enums.WeaponEnum;
 
+public class ProbabilityCalculatorTest {
 	@Test
 	public void testGetProbabilities() {
 		ProbabilityCalculator calc = new ProbabilityCalculatorImpl();
-		ProbabilityReport report = calc.generateProbabilityReport(generateTriples());
+		TripleList triples = new TripleList();
+		triples.add(new Triple(RoomEnum.BALLROOM.getRoom(), SuspectEnum.GREEN.getSuspect(), WeaponEnum.CANDLESTICK
+				.getWeapon()));
+		triples.add(new Triple(RoomEnum.BILLIARDROOM.getRoom(), SuspectEnum.GREEN.getSuspect(), WeaponEnum.CANDLESTICK
+				.getWeapon()));
 
-		// TODO: Test most likely
-		Triple mostLikely = report.getMostLikelyTriple();
-
-		// TODO: Test overall report
-		Collection<CardCount<Weapon>> weaponReport = report.getWeaponCounts();
-		Collection<CardCount<Room>> roomReport = report.getRoomCounts();
-		Collection<CardCount<Suspect>> suspectReport = report.getSuspectCounts();
+		ProbabilityReport report = calc.generateProbabilityReport(triples);
+		Probability<Triple> mostLikely = report.getMostLikelyTriple();
+		assertEquals(.5d, mostLikely.getProbability(), 0.0);
+		assertEquals(.5d, report.getMostLikelyRoom().getProbability(), 0.0);
+		assertEquals(1.0d, report.getMostLikelySuspect().getProbability(), 0.0);
+		assertEquals(1.0d, report.getMostLikelyWeapon().getProbability(), 0.0);
 	}
 
 }
