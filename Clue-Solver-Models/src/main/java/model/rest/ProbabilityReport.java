@@ -1,19 +1,35 @@
-package model;
+package model.rest;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.SortedSet;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
+import model.Card;
+import model.Probability;
+import model.Room;
+import model.Suspect;
+import model.Triple;
+import model.Weapon;
+
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 @XmlRootElement(name = "probabilityReport")
+@XmlSeeAlso({ Room.class, Suspect.class, Triple.class, Weapon.class })
 public class ProbabilityReport {
 	private final SortedSet<Probability<Room>> rooms;
 	private final SortedSet<Probability<Weapon>> weapons;
 	private final SortedSet<Probability<Suspect>> suspects;
+
+	public ProbabilityReport() {
+		rooms = Sets.newTreeSet();
+		weapons = Sets.newTreeSet();
+		suspects = Sets.newTreeSet();
+	}
 
 	public ProbabilityReport(Iterable<Probability<Room>> rooms, Iterable<Probability<Weapon>> weapons,
 			Iterable<Probability<Suspect>> suspects) {
@@ -26,10 +42,12 @@ public class ProbabilityReport {
 		return set.first();
 	}
 
+	@XmlElement(name = "mostLikelyRoom")
 	public Probability<Room> getMostLikelyRoom() {
 		return getMostLikely(rooms);
 	}
 
+	@XmlElement(name = "mostLikelySuspect")
 	public Probability<Suspect> getMostLikelySuspect() {
 		return getMostLikely(suspects);
 	}
@@ -46,22 +64,23 @@ public class ProbabilityReport {
 				suspectProbability.getWrappedObject(), weaponProbability.getWrappedObject()), total);
 	}
 
+	@XmlElement(name = "mostLikelyWeapon")
 	public Probability<Weapon> getMostLikelyWeapon() {
 		return getMostLikely(weapons);
 	}
 
 	@XmlElementWrapper(name = "rooms")
-	public Collection<Probability<Room>> getRoomCounts() {
-		return rooms;
+	public List<Probability<Room>> getRoomCounts() {
+		return Lists.newArrayList(rooms);
 	}
 
 	@XmlElementWrapper(name = "suspects")
-	public Collection<Probability<Suspect>> getSuspectCounts() {
-		return suspects;
+	public List<Probability<Suspect>> getSuspectCounts() {
+		return Lists.newArrayList(suspects);
 	}
 
 	@XmlElementWrapper(name = "weapons")
-	public Collection<Probability<Weapon>> getWeaponCounts() {
-		return weapons;
+	public List<Probability<Weapon>> getWeaponCounts() {
+		return Lists.newArrayList(weapons);
 	}
 }

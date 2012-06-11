@@ -2,9 +2,9 @@ package service.probability;
 
 import static org.junit.Assert.assertEquals;
 import model.Probability;
-import model.ProbabilityReport;
 import model.Triple;
 import model.TripleList;
+import model.rest.ProbabilityReport;
 
 import org.junit.Test;
 

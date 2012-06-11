@@ -7,6 +7,7 @@ import javax.ws.rs.core.Application;
 
 import resources.CardsResource;
 import resources.GameResource;
+import resources.ProbabilitesResource;
 import resources.TriplesResource;
 
 /**
@@ -25,6 +26,7 @@ public class ClueRestService extends Application {
 		resources.add(GameResource.class);
 		resources.add(CardsResource.class);
 		resources.add(TriplesResource.class);
+		resources.add(ProbabilitesResource.class);
 		return resources;
 	}
 }

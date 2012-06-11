@@ -2,6 +2,9 @@ package rest;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+
 import model.Card;
 import model.Room;
 import model.Suspect;
@@ -9,6 +12,7 @@ import model.Triple;
 import model.TripleList;
 import model.Weapon;
 import model.rest.ClueServerStatus;
+import model.rest.ProbabilityReport;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,6 +27,7 @@ import org.restlet.data.Protocol;
 import org.restlet.data.Reference;
 import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 
 import server.ClueServer;
 
@@ -96,6 +101,21 @@ public class ClueServerTest {
 	}
 
 	@Test
+	public void testGetProbabilities() throws ResourceException, IOException {
+		final Reference reference = new Reference("http://localhost/clue/probability.xml");
+		reference.setHostPort(port);
+
+		final ClientResource resource = new ClientResource(reference);
+		resource.setProtocol(Protocol.HTTP);
+		resource.setChallengeResponse(getChallengeResponse());
+
+		System.out.println(resource.get().getText());
+		ProbabilityReport report = resource.get(ProbabilityReport.class);
+		System.out.println(report.getMostLikelyRoom().getProbability());
+		resource.release();
+	}
+
+	@Test
 	public void testPutCard() throws Exception {
 		final Reference reference = new Reference("http://localhost/clue/cards");
 		reference.setHostPort(port);
@@ -131,6 +151,22 @@ public class ClueServerTest {
 	}
 
 	@Test
+	public void testRemainingTriples() {
+		final Reference reference = new Reference("http://localhost/clue/triples/remaining.json");
+		reference.setHostPort(port);
+
+		final ClientResource resource = new ClientResource(reference);
+		resource.setProtocol(Protocol.HTTP);
+		resource.setChallengeResponse(getChallengeResponse());
+
+		final TripleList response = resource.get(TripleList.class);
+		resource.release();
+
+		assertNotNull(response);
+		assertEquals(324, response.size());
+	}
+
+	@Test
 	public void testServerGetStatus() throws Exception {
 		final Reference reference = new Reference("http://localhost/clue/game.xml");
 		reference.setHostPort(port);
@@ -143,21 +179,5 @@ public class ClueServerTest {
 		resource.release();
 
 		assertNotNull(response);
-	}
-	
-	@Test
-	public void testRemainingTriples() {
-		final Reference reference = new Reference("http://localhost/clue/triples/remaining.json");
-		reference.setHostPort(port);
-		
-		final ClientResource resource = new ClientResource(reference);
-		resource.setProtocol(Protocol.HTTP);
-		resource.setChallengeResponse(getChallengeResponse());
-		
-		final TripleList response = resource.get(TripleList.class);
-		resource.release();
-		
-		assertNotNull(response);
-		assertEquals(324, response.size());
 	}
 }

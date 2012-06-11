@@ -5,12 +5,12 @@ import java.util.List;
 import model.Card;
 import model.ObjectCounter;
 import model.Probability;
-import model.ProbabilityReport;
 import model.Room;
 import model.Suspect;
 import model.Triple;
 import model.TripleList;
 import model.Weapon;
+import model.rest.ProbabilityReport;
 
 import com.google.common.collect.Lists;
 

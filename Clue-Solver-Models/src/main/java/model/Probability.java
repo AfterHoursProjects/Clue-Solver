@@ -9,6 +9,12 @@ public class Probability<T> implements Comparable<Probability<T>> {
 	private final double probability;
 	private final T wrappedObject;
 
+	@SuppressWarnings("unused")
+	private Probability() {
+		probability = 0.0;
+		wrappedObject = null;
+	}
+
 	public Probability(T object, double probability) {
 		this.wrappedObject = object;
 		this.probability = probability;
@@ -24,7 +30,7 @@ public class Probability<T> implements Comparable<Probability<T>> {
 		return probability;
 	}
 
-	@XmlAnyElement(lax = true)
+	@XmlAnyElement()
 	public T getWrappedObject() {
 		return wrappedObject;
 	}

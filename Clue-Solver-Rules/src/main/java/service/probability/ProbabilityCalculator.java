@@ -1,7 +1,7 @@
 package service.probability;
 
-import model.ProbabilityReport;
 import model.TripleList;
+import model.rest.ProbabilityReport;
 
 /**
  * Calculation services for probability
