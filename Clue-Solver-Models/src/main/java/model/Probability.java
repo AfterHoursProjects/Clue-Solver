@@ -25,7 +25,7 @@ public class Probability<T> implements Comparable<Probability<T>> {
 		return Double.valueOf(probability).compareTo(Double.valueOf(other.getProbability()));
 	}
 
-	@XmlAttribute(name = "value")
+	@XmlAttribute(name = "chance")
 	public double getProbability() {
 		return probability;
 	}

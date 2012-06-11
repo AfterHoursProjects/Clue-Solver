@@ -1,5 +1,6 @@
 package service.probability;
 
+import java.util.Collections;
 import java.util.List;
 
 import model.Card;
@@ -18,11 +19,29 @@ public class ProbabilityCalculatorImpl implements ProbabilityCalculator {
 	private final CardCounter counter = new CardCounterImpl();
 
 	private ProbabilityReport createReportFromCounter(CardCounter counter) {
-		Iterable<ObjectCounter<Weapon>> weapons = counter.getCountForCardType(Weapon.class);
-		Iterable<ObjectCounter<Suspect>> suspects = counter.getCountForCardType(Suspect.class);
-		Iterable<ObjectCounter<Room>> rooms = counter.getCountForCardType(Room.class);
+		List<Probability<Weapon>> weapons = toSortedProbabilities(counter.getCountForCardType(Weapon.class));
+		List<Probability<Suspect>> suspects = toSortedProbabilities(counter.getCountForCardType(Suspect.class));
+		List<Probability<Room>> rooms = toSortedProbabilities(counter.getCountForCardType(Room.class));
 
-		return new ProbabilityReport(toProbabilities(rooms), toProbabilities(weapons), toProbabilities(suspects));
+		ProbabilityReport report = new ProbabilityReport();
+		report.setRooms(rooms);
+		report.setWeapons(weapons);
+		report.setSuspects(suspects);
+
+		Probability<Room> mostLikelyRoom = rooms.get(0);
+		Probability<Suspect> mostLikelySuspect = suspects.get(0);
+		Probability<Weapon> mostLikelyWeapon = weapons.get(0);
+
+		report.setMostLikelyRoom(mostLikelyRoom);
+		report.setMostLikelySuspect(mostLikelySuspect);
+		report.setMostLikelyWeapon(mostLikelyWeapon);
+
+		double tripleProbability = mostLikelyRoom.getProbability() * mostLikelySuspect.getProbability()
+				* mostLikelyWeapon.getProbability();
+		report.setMostLikelyTriple(new Probability<Triple>(new Triple(mostLikelyRoom.getWrappedObject(), mostLikelySuspect
+				.getWrappedObject(), mostLikelyWeapon.getWrappedObject()), tripleProbability));
+
+		return report;
 	}
 
 	@Override
@@ -34,7 +53,7 @@ public class ProbabilityCalculatorImpl implements ProbabilityCalculator {
 		return createReportFromCounter(counter);
 	}
 
-	private <F extends Card> List<Probability<F>> toProbabilities(Iterable<ObjectCounter<F>> toConvert) {
+	private <F extends Card> List<Probability<F>> toSortedProbabilities(Iterable<ObjectCounter<F>> toConvert) {
 		List<Probability<F>> converted = Lists.newArrayList();
 		double size = 0;
 
@@ -47,6 +66,7 @@ public class ProbabilityCalculatorImpl implements ProbabilityCalculator {
 			converted.add(new Probability<F>(counter.getCard(), counter.getCount() / size));
 		}
 
+		Collections.sort(converted);
 		return converted;
 	}
 }
