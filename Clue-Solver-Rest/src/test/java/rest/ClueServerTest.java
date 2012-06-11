@@ -102,7 +102,7 @@ public class ClueServerTest {
 
 	@Test
 	public void testGetProbabilities() throws ResourceException, IOException {
-		final Reference reference = new Reference("http://localhost/clue/probability.xml");
+		final Reference reference = new Reference("http://localhost/clue/probability.json");
 		reference.setHostPort(port);
 
 		final ClientResource resource = new ClientResource(reference);

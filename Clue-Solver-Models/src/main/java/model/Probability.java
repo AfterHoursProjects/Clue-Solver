@@ -6,9 +6,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "probability")
 public class Probability<T> implements Comparable<Probability<T>> {
-	private final double probability;
-	private final T wrappedObject;
+	private double probability;
+	private T wrappedObject;
 
+	// For jackson json parsing
 	@SuppressWarnings("unused")
 	private Probability() {
 		probability = 0.0;
@@ -33,5 +34,17 @@ public class Probability<T> implements Comparable<Probability<T>> {
 	@XmlAnyElement()
 	public T getWrappedObject() {
 		return wrappedObject;
+	}
+	
+	// For jackson json parsing
+	@SuppressWarnings("unused")
+	private void setWrappedObject(T wrappedObject) {
+		this.wrappedObject = wrappedObject;
+	}
+
+	// For jackson json parsing
+	@SuppressWarnings("unused")
+	private void setProbability(double probability) {
+		this.probability = probability;
 	}
 }
