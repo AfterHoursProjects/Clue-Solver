@@ -22,33 +22,35 @@ import org.restlet.resource.ClientResource;
 
 import popup.EliminateCardPopUp;
 import popup.EliminateTriplePopUp;
+import popup.ShowStatisticsPopUp;
 import service.ComponentCreator;
 import service.ServerService;
 
 public class ClueSolverGUI extends JFrame {
 	private static final long serialVersionUID = -6289692480071914521L;
-	private ComponentCreator componentCreator;
-	private BorderLayout clueSolverLayout;
+	private final ComponentCreator componentCreator;
+	private final BorderLayout clueSolverLayout;
 
-	private JButton eliminateCardButton;
-	private JButton eliminateTripleButton;
+	private final JButton eliminateCardButton;
+	private final JButton eliminateTripleButton;
 
-	private JLabel remainingLabel;
+	private final JLabel remainingLabel;
 
-	private JComboBox remainingComboBox;
+	private final JComboBox remainingComboBox;
 
-	private JPanel buttonPanel;
-	private JPanel remainingPanel;
+	private final JPanel buttonPanel;
+	private final JPanel remainingPanel;
 
-	private ButtonHandler handler;
+	private final ButtonHandler handler;
 
-	private int screenWidth;
-	private int screenHeight;
-	private int eliminateCardPopUpWidth;
-	private int eliminateCardPopUpHeight;
-	private int eliminateTriplePopUpWidth;
-	private int eliminateTriplePopUpHeight;
+	private final int screenWidth;
+	private final int screenHeight;
+	private final int eliminateCardPopUpWidth;
+	private final int eliminateCardPopUpHeight;
+	private final int eliminateTriplePopUpWidth;
+	private final int eliminateTriplePopUpHeight;
 	private int count;
+	private final JButton button;
 
 	public ClueSolverGUI() {
 		super("Clue Solver");
@@ -77,8 +79,10 @@ public class ClueSolverGUI extends JFrame {
 		// TODO: create classes for these and remove using a string to get the right button
 		eliminateCardButton = componentCreator.getEliminateButton(" ELIMINATE CARD ");
 		eliminateTripleButton = componentCreator.getEliminateButton(" ELIMINATE TRIPLE ");
+		button = new JButton("View Probability");
 		buttonPanel.add(eliminateCardButton);
 		buttonPanel.add(eliminateTripleButton);
+		buttonPanel.add(button);
 
 		add(remainingPanel, BorderLayout.NORTH);
 		add(buttonPanel, BorderLayout.CENTER);
@@ -87,6 +91,7 @@ public class ClueSolverGUI extends JFrame {
 		handler = new ButtonHandler(this);
 		eliminateCardButton.addActionListener(handler);
 		eliminateTripleButton.addActionListener(handler);
+		button.addActionListener(handler);
 		this.updateRemainingTriples();
 	}
 
@@ -97,6 +102,7 @@ public class ClueSolverGUI extends JFrame {
 			this.parent = parent;
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == eliminateCardButton) {
 				EliminateCardPopUp eliminateCardPopUp = new EliminateCardPopUp(parent);
@@ -119,10 +125,21 @@ public class ClueSolverGUI extends JFrame {
 				eliminateTriplePopUp.setResizable(false);
 				eliminateTriplePopUp.setVisible(true);
 			}
+
+			if (event.getSource() == button) {
+				ShowStatisticsPopUp popup = new ShowStatisticsPopUp(parent);
+				popup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				popup.setSize(eliminateTriplePopUpWidth, eliminateTriplePopUpHeight);
+				popup.setLocation((screenWidth / 2) - (eliminateTriplePopUpWidth / 2), (screenHeight / 2)
+						- (eliminateTriplePopUpHeight / 2));
+				popup.setAlwaysOnTop(true);
+				popup.setResizable(false);
+				popup.setVisible(true);
+			}
 		}
 	}
 
-	//TODO: Find a better way than removing all then re-adding them
+	// TODO: Find a better way than removing all then re-adding them
 	public void updateRemainingTriples() {
 		this.remainingComboBox.removeAllItems();
 		for (Triple triple : getRemainingTriples()) {
@@ -143,5 +160,5 @@ public class ClueSolverGUI extends JFrame {
 
 		return response;
 	}
-	
+
 }
