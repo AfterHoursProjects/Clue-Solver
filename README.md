@@ -43,7 +43,7 @@ Clue Solver Rest
 	+ Handles conversion from Java to XML and back
 	+ Annotated objects in the Clue-Solver-Models module
 	+ If adding a new object be sure to add it to jaxb.index for that package so that it can be created
-	+ Part of 
+	+ Part of standard JDK
 + Enunciate
 	+ Generates the API documentation including the active paths that can be connected to
 	+ Generates the XML information such as examples
