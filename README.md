@@ -2,6 +2,14 @@ Clue-Solver
 ===========
 See [Project Site][Project Site] for reports and api
 
+Building the Workspace
+----------------------
+1. Run the command from console `mvn eclipse:eclipse`
+	+ If your build for myeclipse the command is `mvn eclipse:myeclipse`
+	+ If you need to undo the generation use `mvn eclipse:clean`
+2. After the command is run you should be able to import the project as you normally do from the git repositories view or from. File -> Import -> Existing Projects into Workspace
+3. For more information about the changes [Maven Eclipse Generator][Eclipse Site]
+
 Build Instructions
 ------------------
 ### Requirements
@@ -54,3 +62,4 @@ The site is full navigable from the html in the target directory, does not need 
 [Jackson Site]: http://jackson.codehaus.org/Home "Jackson Home Page"
 [Enunciate Site]: http://enunciate.codehaus.org/ "Enunciate"
 [Project Site]: http://mcclellanmj.github.com/Clue-Solver "Project Site"
+[Eclipse Site]: http://maven.apache.org/guides/mini/guide-ide-eclipse.html "Maven Eclipse Generator"
