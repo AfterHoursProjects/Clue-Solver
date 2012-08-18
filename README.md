@@ -25,6 +25,9 @@ Build Instructions
 3. Run command 'mvn clean package'
 	+ This will run all tests and should produce project artifacts
 
+### Generating Enunciate
+1. Run `mvn clean site` from root of project
+
 Clue Solver Rest
 ----------------
 ### Rest Server Tech/Dependencies
