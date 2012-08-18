@@ -52,7 +52,7 @@ Clue Solver Rest
 	+ [Enunciate Home Page][Enunciate Site]
 
 ### Api Docs
-After running the build command the full API docs should be available in the directory
+After running `mvn clean site` the full API docs should be available in the directory
 `Clue-Solver-Rest/target/site/wsdocs/index.html`
 Navigating from this site will also allow you to download any of the generated code libraries
 The site is full navigable from the html in the target directory, does not need to be deployed to a server
