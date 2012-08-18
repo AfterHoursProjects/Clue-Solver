@@ -1,28 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.2" timestamp="2012-08-18T15:08:21.092">
+<pmd version="4.2.2" timestamp="2012-08-18T15:47:48.002">
 <file name="C:\Users\matt\git\Clue-Solver\Clue-Solver-Rest\src\main\java\main\input\ConsoleControl.java">
 <violation beginline="21" endline="22" begincolumn="83" endcolumn="33" rule="EmptyWhileStmt" ruleset="Basic Rules" package="main.input" class="ConsoleControl$InputListenerThread" method="run" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyWhileStmt" priority="3">
 Avoid empty while statements
 </violation>
 </file>
 <file name="C:\Users\matt\git\Clue-Solver\Clue-Solver-Swing\src\main\java\main\ClueSolverGUI.java">
-<violation beginline="24" endline="24" begincolumn="38" endcolumn="57" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="main" class="ClueSolverGUI" variable="componentManipulator" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
-Avoid unused private fields such as 'componentManipulator'.
-</violation>
-<violation beginline="27" endline="27" begincolumn="28" endcolumn="39" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="main" class="ClueSolverGUI" variable="buttonLayout" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
-Avoid unused private fields such as 'buttonLayout'.
-</violation>
-<violation beginline="32" endline="32" begincolumn="24" endcolumn="37" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="main" class="ClueSolverGUI" variable="remainingLabel" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
+<violation beginline="36" endline="36" begincolumn="24" endcolumn="37" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="main" class="ClueSolverGUI" variable="remainingLabel" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
 Avoid unused private fields such as 'remainingLabel'.
 </violation>
 </file>
-<file name="C:\Users\matt\git\Clue-Solver\Clue-Solver-Swing\src\main\java\popup\EliminateCardPopUp.java">
-<violation beginline="100" endline="100" begincolumn="33" endcolumn="45" rule="UnusedLocalVariable" ruleset="Unused Code Rules" package="popup" class="EliminateCardPopUp$ButtonHandler" method="actionPerformed" variable="buttonPressed" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedLocalVariable" priority="3">
-Avoid unused local variables such as 'buttonPressed'.
-</violation>
-</file>
 <file name="C:\Users\matt\git\Clue-Solver\Clue-Solver-Swing\src\main\java\popup\EliminateTriplePopUp.java">
-<violation beginline="212" endline="214" begincolumn="64" endcolumn="25" rule="EmptyIfStmt" ruleset="Basic Rules" package="popup" class="EliminateTriplePopUp$RadioButtonHandler" method="actionPerformed" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+<violation beginline="87" endline="89" begincolumn="64" endcolumn="25" rule="EmptyIfStmt" ruleset="Basic Rules" package="popup" class="EliminateTriplePopUp$RadioButtonHandler" method="actionPerformed" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
 Avoid empty if statements
 </violation>
 </file>
@@ -49,4 +38,6 @@ Avoid unused imports such as 'javax.swing.JPanel'
 Avoid unused imports such as 'javax.swing.JRadioButton'
 </violation>
 </file>
+<suppressedviolation filename="C:\Users\matt\git\Clue-Solver\Clue-Solver-Models\src\main\java\model\Probability.java" suppressiontype="annotation" msg="Avoid unused private methods such as 'setCardProbability(double)'." usermsg=""/>
+<suppressedviolation filename="C:\Users\matt\git\Clue-Solver\Clue-Solver-Models\src\main\java\model\Probability.java" suppressiontype="annotation" msg="Avoid unused private methods such as 'setWrappedObject(T)'." usermsg=""/>
 </pmd>

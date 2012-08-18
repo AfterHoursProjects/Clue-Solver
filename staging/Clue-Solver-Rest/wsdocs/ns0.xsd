@@ -1,0 +1,86 @@
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="card" type="card"/>
+  <xs:element name="cardProbability" type="probability"/>
+  <xs:element name="room" type="room"/>
+  <xs:element name="suspect" type="suspect"/>
+  <xs:element name="triple" type="triple"/>
+  <xs:element name="weapon" type="weapon"/>
+  <xs:element name="status" type="clueServerStatus"/>
+  <xs:element name="probabilityReport" type="probabilityReport"/>
+  <xs:complexType name="card">
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="probability">
+    <xs:attribute name="chance" use="required" type="xs:double"/>
+  </xs:complexType>
+  <xs:complexType name="room">
+    <xs:complexContent>
+      <xs:extension base="card"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="suspect">
+    <xs:complexContent>
+      <xs:extension base="card"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="triple">
+    <xs:sequence>
+      <xs:element name="suspect" type="suspect" minOccurs="0"/>
+      <xs:element name="room" type="room" minOccurs="0"/>
+      <xs:element name="weapon" type="weapon" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="weapon">
+    <xs:complexContent>
+      <xs:extension base="card"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="clueServerStatus">
+    <xs:sequence>
+      <xs:element name="remainingTriples" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="triple" type="triple" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="remainingCards" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="card" type="card" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="probabilityReport">
+    <xs:sequence>
+      <xs:element name="rooms" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="roomProbability" type="probability" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mostLikelyWeapon" type="probability" minOccurs="0"/>
+      <xs:element name="mostLikelyRoom" type="probability" minOccurs="0"/>
+      <xs:element name="weapons" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="weaponProbability" type="probability" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mostLikelyTriple" type="probability" minOccurs="0"/>
+      <xs:element name="mostLikelySuspect" type="probability" minOccurs="0"/>
+      <xs:element name="suspects" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="suspectProbability" type="probability" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

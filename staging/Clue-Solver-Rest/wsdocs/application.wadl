@@ -1,0 +1,78 @@
+<wadl:application xmlns:wadl="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wadl:doc xmlns:enunciate="http://enunciate.codehaus.org/" enunciate:generatedBy="Enunciate-1.25"/>
+  <wadl:grammars>
+    <wadl:include href="ns0.xsd"/>
+  </wadl:grammars>
+  <wadl:resources base="http://localhost:8080/Clue-Solver-Rest">
+    <wadl:resource path="/clue/cards">
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Inserts a card into the rule session]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the Card to be inserted into the rule session]]>
+          </wadl:doc>
+          <wadl:representation mediaType="text/xml" element="card"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/clue/game">
+      <wadl:method name="DELETE">
+        <wadl:doc>
+          <![CDATA[Resets the game back to having no cards inserted into its facts and regenerates all triples]]>
+        </wadl:doc>
+      </wadl:method>
+      <wadl:method name="GET">
+        <wadl:doc>
+          <![CDATA[Retrieves the current status of the game, this can produce both JSON and XML depending on your needs]]>
+        </wadl:doc>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the ClueServerStatus of the users current session]]>
+          </wadl:doc>
+          <wadl:representation mediaType="text/xml" element="status"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/clue/probability">
+      <wadl:method name="GET">
+        <wadl:response>
+          <wadl:representation mediaType="text/xml" element="probabilityReport"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/clue/triples">
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Put a Triple into the game session]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[The triple that is to be inserted, this can be either JSON or XML]]>
+          </wadl:doc>
+          <wadl:representation mediaType="text/xml" element="triple"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/clue/triples/remaining">
+      <wadl:method name="GET">
+        <wadl:doc>
+          <![CDATA[Returns a list of the remaining triples, if none are left an empty list will
+be returned]]>
+        </wadl:doc>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[all remaining triples]]>
+          </wadl:doc>
+          <wadl:representation mediaType="text/xml"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+  </wadl:resources>
+</wadl:application>

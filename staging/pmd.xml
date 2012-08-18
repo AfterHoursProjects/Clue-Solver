@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.2.2" timestamp="2012-08-18T15:57:54.239">
+<file name="C:\Users\matt\git\Clue-Solver\Clue-Solver-Rest\src\main\java\main\input\ConsoleControl.java">
+<violation beginline="21" endline="22" begincolumn="83" endcolumn="33" rule="EmptyWhileStmt" ruleset="Basic Rules" package="main.input" class="ConsoleControl$InputListenerThread" method="run" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyWhileStmt" priority="3">
+Avoid empty while statements
+</violation>
+</file>
+<file name="C:\Users\matt\git\Clue-Solver\Clue-Solver-Swing\src\main\java\main\ClueSolverGUI.java">
+<violation beginline="36" endline="36" begincolumn="24" endcolumn="37" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="main" class="ClueSolverGUI" variable="remainingLabel" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
+Avoid unused private fields such as 'remainingLabel'.
+</violation>
+</file>
+<file name="C:\Users\matt\git\Clue-Solver\Clue-Solver-Swing\src\main\java\popup\EliminateTriplePopUp.java">
+<violation beginline="87" endline="89" begincolumn="64" endcolumn="25" rule="EmptyIfStmt" ruleset="Basic Rules" package="popup" class="EliminateTriplePopUp$RadioButtonHandler" method="actionPerformed" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+</file>
+<file name="C:\Users\matt\git\Clue-Solver\Clue-Solver-Swing\src\main\java\service\ComponentManipulator.java">
+<violation beginline="3" endline="3" begincolumn="1" endcolumn="37" rule="UnusedImports" ruleset="Import Statement Rules" package="service" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'java.awt.event.ActionListener'
+</violation>
+<violation beginline="5" endline="5" begincolumn="1" endcolumn="31" rule="UnusedImports" ruleset="Import Statement Rules" package="service" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'javax.swing.ButtonGroup'
+</violation>
+<violation beginline="6" endline="6" begincolumn="1" endcolumn="27" rule="UnusedImports" ruleset="Import Statement Rules" package="service" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'javax.swing.JButton'
+</violation>
+<violation beginline="7" endline="7" begincolumn="1" endcolumn="26" rule="UnusedImports" ruleset="Import Statement Rules" package="service" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'javax.swing.JFrame'
+</violation>
+<violation beginline="8" endline="8" begincolumn="1" endcolumn="31" rule="UnusedImports" ruleset="Import Statement Rules" package="service" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'javax.swing.JOptionPane'
+</violation>
+<violation beginline="9" endline="9" begincolumn="1" endcolumn="26" rule="UnusedImports" ruleset="Import Statement Rules" package="service" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'javax.swing.JPanel'
+</violation>
+<violation beginline="10" endline="10" begincolumn="1" endcolumn="32" rule="UnusedImports" ruleset="Import Statement Rules" package="service" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'javax.swing.JRadioButton'
+</violation>
+</file>
+<suppressedviolation filename="C:\Users\matt\git\Clue-Solver\Clue-Solver-Models\src\main\java\model\Probability.java" suppressiontype="annotation" msg="Avoid unused private methods such as 'setCardProbability(double)'." usermsg=""/>
+<suppressedviolation filename="C:\Users\matt\git\Clue-Solver\Clue-Solver-Models\src\main\java\model\Probability.java" suppressiontype="annotation" msg="Avoid unused private methods such as 'setWrappedObject(T)'." usermsg=""/>
+</pmd>
