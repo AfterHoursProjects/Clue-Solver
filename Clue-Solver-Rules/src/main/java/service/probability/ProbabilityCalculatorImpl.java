@@ -36,8 +36,8 @@ public class ProbabilityCalculatorImpl implements ProbabilityCalculator {
 		report.setMostLikelySuspect(mostLikelySuspect);
 		report.setMostLikelyWeapon(mostLikelyWeapon);
 
-		double tripleProbability = mostLikelyRoom.getProbability() * mostLikelySuspect.getProbability()
-				* mostLikelyWeapon.getProbability();
+		double tripleProbability = mostLikelyRoom.getCardProbability() * mostLikelySuspect.getCardProbability()
+				* mostLikelyWeapon.getCardProbability();
 		report.setMostLikelyTriple(new Probability<Triple>(new Triple(mostLikelyRoom.getWrappedObject(), mostLikelySuspect
 				.getWrappedObject(), mostLikelyWeapon.getWrappedObject()), tripleProbability));
 

@@ -23,11 +23,11 @@ public class ProbabilityCalculatorTest {
 
 		ProbabilityReport report = calc.generateProbabilityReport(triples);
 		Probability<Triple> mostLikely = report.getMostLikelyTriple();
-		assertEquals(.5d, mostLikely.getProbability(), 0.0);
+		assertEquals(.5d, mostLikely.getCardProbability(), 0.0);
 		assertTrue(report.getRooms().size() == 2);
-		assertEquals(.5d, report.getMostLikelyRoom().getProbability(), 0.0);
-		assertEquals(1.0d, report.getMostLikelySuspect().getProbability(), 0.0);
-		assertEquals(1.0d, report.getMostLikelyWeapon().getProbability(), 0.0);
+		assertEquals(.5d, report.getMostLikelyRoom().getCardProbability(), 0.0);
+		assertEquals(1.0d, report.getMostLikelySuspect().getCardProbability(), 0.0);
+		assertEquals(1.0d, report.getMostLikelyWeapon().getCardProbability(), 0.0);
 	}
 
 }

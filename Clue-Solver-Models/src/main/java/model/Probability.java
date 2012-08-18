@@ -4,31 +4,31 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "probability")
+@XmlRootElement(name = "cardProbability")
 public class Probability<T> implements Comparable<Probability<T>> {
-	private double probability;
+	private double cardProbability;
 	private T wrappedObject;
 
 	// For jackson json parsing
 	@SuppressWarnings("unused")
 	private Probability() {
-		probability = 0.0;
+		cardProbability = 0.0;
 		wrappedObject = null;
 	}
 
 	public Probability(T object, double probability) {
 		this.wrappedObject = object;
-		this.probability = probability;
+		this.cardProbability = probability;
 	}
 
 	@Override
 	public int compareTo(Probability<T> other) {
-		return Double.valueOf(probability).compareTo(Double.valueOf(other.getProbability()));
+		return Double.valueOf(cardProbability).compareTo(Double.valueOf(other.getCardProbability()));
 	}
 
 	@XmlAttribute(name = "chance")
-	public double getProbability() {
-		return probability;
+	public double getCardProbability() {
+		return cardProbability;
 	}
 
 	@XmlAnyElement()
@@ -44,7 +44,7 @@ public class Probability<T> implements Comparable<Probability<T>> {
 
 	// For jackson json parsing
 	@SuppressWarnings("unused")
-	private void setProbability(double probability) {
-		this.probability = probability;
+	private void setCardProbability(double probability) {
+		this.cardProbability = probability;
 	}
 }

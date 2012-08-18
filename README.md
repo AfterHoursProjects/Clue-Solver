@@ -57,12 +57,10 @@ After running the build command the full API docs should be available in the dir
 Navigating from this site will also allow you to download any of the generated code libraries
 The site is full navigable from the html in the target directory, does not need to be deployed to a server
 
-
-
 [Maven Site]: http://maven.apache.org/download.html "Apache Maven download"
 [Java Site]: http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html "Java Download"
 [Restlet Site]: http://www.restlet.org/ "Restlet Home Page"
 [Jackson Site]: http://jackson.codehaus.org/Home "Jackson Home Page"
 [Enunciate Site]: http://enunciate.codehaus.org/ "Enunciate"
-[Project Site]: http://mcclellanmj.github.com/Clue-Solver "Project Site"
+[Project Site]: http://AfterHoursProjects.github.com/Clue-Solver "Project Site"
 [Eclipse Site]: http://maven.apache.org/guides/mini/guide-ide-eclipse.html "Maven Eclipse Generator"

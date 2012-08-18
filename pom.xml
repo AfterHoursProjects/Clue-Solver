@@ -7,6 +7,13 @@
 	<packaging>pom</packaging>
 	<name>ClueSolver</name>
 
+	<distributionManagement>
+		<site>
+			<id>projectSite</id>
+			<url>https://AfterHoursProjects.github.com/Clue-Solver/</url>
+		</site>
+	</distributionManagement>
+
 	<properties>
 		<restletVersion>2.0.13</restletVersion>
 		<jdkVersion>1.6</jdkVersion>

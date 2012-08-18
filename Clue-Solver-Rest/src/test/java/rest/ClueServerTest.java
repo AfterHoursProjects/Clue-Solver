@@ -111,7 +111,7 @@ public class ClueServerTest {
 
 		System.out.println(resource.get().getText());
 		ProbabilityReport report = resource.get(ProbabilityReport.class);
-		System.out.println(report.getMostLikelyRoom().getProbability());
+		System.out.println(report.getMostLikelyRoom().getCardProbability());
 		resource.release();
 	}
 
