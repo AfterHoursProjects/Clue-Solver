@@ -82,6 +82,7 @@ public class EliminateTriplePopUp extends JFrame {
 				client.handle(request);
 
 				parent.updateRemainingTriples();
+				parent.updateMostLikelyTriple();
 			}
 
 			if (event.getSource() == cancelButton) {

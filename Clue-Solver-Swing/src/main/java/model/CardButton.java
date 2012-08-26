@@ -34,6 +34,7 @@ public class CardButton extends JButton {
 
 				client.release();
 				parent.getParent().updateRemainingTriples();
+				parent.getParent().updateMostLikelyTriple();
 				parent.dispose();
 			}
 		});

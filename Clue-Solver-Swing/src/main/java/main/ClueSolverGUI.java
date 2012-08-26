@@ -5,6 +5,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -15,10 +16,12 @@ import javax.swing.JPanel;
 
 import model.Triple;
 import model.TripleList;
+import model.rest.ProbabilityReport;
 
 import org.restlet.data.Protocol;
 import org.restlet.data.Reference;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 
 import popup.EliminateCardPopUp;
 import popup.EliminateTriplePopUp;
@@ -35,6 +38,8 @@ public class ClueSolverGUI extends JFrame {
 
 	private JLabel remainingLabel;
 
+	private JLabel probabilityLabel = new JLabel();
+
 	private JComboBox remainingComboBox;
 
 	private JPanel buttonPanel;
@@ -48,9 +53,8 @@ public class ClueSolverGUI extends JFrame {
 	private int eliminateCardPopUpHeight;
 	private int eliminateTriplePopUpWidth;
 	private int eliminateTriplePopUpHeight;
-	private int count;
 
-	public ClueSolverGUI() {
+	public ClueSolverGUI() throws ResourceException, IOException {
 		super("Clue Solver");
 
 		GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -69,12 +73,14 @@ public class ClueSolverGUI extends JFrame {
 		setLayout(clueSolverLayout);
 
 		remainingPanel = componentCreator.getFlowPanel();
-		remainingLabel = new JLabel("Possible Combinations Remaining: " + count);
+		remainingLabel = new JLabel("Remaining Triples: ");
 		remainingComboBox = componentCreator.getComboBox();
+		remainingPanel.add(remainingLabel);
 		remainingPanel.add(remainingComboBox);
 
 		buttonPanel = componentCreator.getFlowPanel();
-		// TODO: create classes for these and remove using a string to get the right button
+		// TODO: create classes for these and remove using a string to get the
+		// right button
 		eliminateCardButton = componentCreator.getEliminateButton(" ELIMINATE CARD ");
 		eliminateTripleButton = componentCreator.getEliminateButton(" ELIMINATE TRIPLE ");
 		buttonPanel.add(eliminateCardButton);
@@ -82,12 +88,29 @@ public class ClueSolverGUI extends JFrame {
 
 		add(remainingPanel, BorderLayout.NORTH);
 		add(buttonPanel, BorderLayout.CENTER);
+		add(probabilityLabel, BorderLayout.SOUTH);
 
-		// TODO: remove button handler and move logic to classes created for buttons.
+		// TODO: remove button handler and move logic to classes created for
+		// buttons.
 		handler = new ButtonHandler(this);
 		eliminateCardButton.addActionListener(handler);
 		eliminateTripleButton.addActionListener(handler);
 		this.updateRemainingTriples();
+		this.updateMostLikelyTriple();
+	}
+
+	public void updateMostLikelyTriple() {
+		final Reference reference = new Reference("http://localhost/clue/probability.json");
+		reference.setHostPort(ServerService.getPort());
+
+		final ClientResource resource = new ClientResource(reference);
+		resource.setProtocol(Protocol.HTTP);
+		resource.setChallengeResponse(ServerService.getChallengeResponse());
+
+		ProbabilityReport report = resource.get(ProbabilityReport.class);
+		Triple mostLikelyTriple = report.getMostLikelyTriple().getWrappedObject();
+		probabilityLabel.setText("Most likely triple: " + mostLikelyTriple.toString());
+		resource.release();
 	}
 
 	private class ButtonHandler implements ActionListener {
@@ -105,7 +128,7 @@ public class ClueSolverGUI extends JFrame {
 				eliminateCardPopUp.setLocation((screenWidth / 2) - (eliminateCardPopUpWidth / 2), (screenHeight / 2)
 						- (eliminateCardPopUpHeight / 2));
 				eliminateCardPopUp.setAlwaysOnTop(true);
-				eliminateCardPopUp.setResizable(false);
+				eliminateCardPopUp.setResizable(true);
 				eliminateCardPopUp.setVisible(true);
 			}
 
@@ -116,13 +139,13 @@ public class ClueSolverGUI extends JFrame {
 				eliminateTriplePopUp.setLocation((screenWidth / 2) - (eliminateTriplePopUpWidth / 2),
 						(screenHeight / 2) - (eliminateTriplePopUpHeight / 2));
 				eliminateTriplePopUp.setAlwaysOnTop(true);
-				eliminateTriplePopUp.setResizable(false);
+				eliminateTriplePopUp.setResizable(true);
 				eliminateTriplePopUp.setVisible(true);
 			}
 		}
 	}
 
-	//TODO: Find a better way than removing all then re-adding them
+	// TODO: Find a better way than removing all then re-adding them
 	public void updateRemainingTriples() {
 		this.remainingComboBox.removeAllItems();
 		for (Triple triple : getRemainingTriples()) {
@@ -143,5 +166,5 @@ public class ClueSolverGUI extends JFrame {
 
 		return response;
 	}
-	
+
 }
