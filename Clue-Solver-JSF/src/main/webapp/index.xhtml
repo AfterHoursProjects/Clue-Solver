@@ -16,6 +16,9 @@
                 <f:selectItems value="#{mainAction.remainingTriples}"/>
             </h:selectOneMenu>
             <br/><br/>
+            <h:button outcome="card" value="Eliminate Card"/>
+            <h:button outcome="triple" value="Eliminate Triple"/>
+            <br/><br/>
             <b>Most Likely Triple <i><h:outputText value="#{mainAction.mostLikelyTripleTxt}"/></i></b>
         </h:form>
     </h:body>
