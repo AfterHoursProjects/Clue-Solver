@@ -5,25 +5,34 @@ import java.util.HashSet;
 import model.Weapon;
 
 public enum WeaponEnum {
-	CANDLESTICK(new Weapon("candlestick")), WRENCH(new Weapon("wrench")), ROPE(new Weapon("rope")), REVOLVER(new Weapon("revolver")), KNIFE(
-			new Weapon("knife")), LEADPIPE(new Weapon("lead pipe"));
 
-	public static Iterable<String> getStringValues() {
-		HashSet<String> weapons = new HashSet<String>();
-		for (WeaponEnum renum : values()) {
-			weapons.add(renum.name());
-		}
+    CANDLESTICK(new Weapon("candlestick")),
+    
+    WRENCH(new Weapon("wrench")),
+    
+    ROPE(new Weapon("rope")),
+    
+    REVOLVER(new Weapon("revolver")),
+    
+    KNIFE(new Weapon("knife")),
+    
+    LEADPIPE(new Weapon("lead pipe"));
 
-		return weapons;
-	}
+    public static Iterable<String> getStringValues() {
+        HashSet<String> weapons = new HashSet<String>();
+        for (WeaponEnum renum : values()) {
+            weapons.add(renum.name());
+        }
 
-	private Weapon weapon;
+        return weapons;
+    }
+    private Weapon weapon;
 
-	private WeaponEnum(Weapon weapon) {
-		this.weapon = weapon;
-	}
+    private WeaponEnum(Weapon weapon) {
+        this.weapon = weapon;
+    }
 
-	public Weapon getWeapon() {
-		return this.weapon;
-	}
+    public Weapon getWeapon() {
+        return this.weapon;
+    }
 }
