@@ -1,20 +1,39 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:p="http://primefaces.org/ui"  
+      xmlns:f="http://java.sun.com/jsf/core">
+
     <h:head>
         <title>Eliminate Card</title>
     </h:head>
     <h:body>
-        <ui:composition>   
-            Select a Card to Eliminate:
-            <h:panelGrid binding="#{mainAction.eliminateCardComponents}" columns="3" border="2" />
-            
-        <br/><br/>
-        <h:button outcome="main" value="cancel"/>
-        </ui:composition>
- 
+        <h:form>
+            <p:panel style="min-width: 465px;max-width: 465px">
+                <f:facet name="header">
+                    <h:outputText value="Please choose card to eliminate:"/>
+                </f:facet>
+
+                <h:panelGrid columns="3">
+                    <p:selectOneListbox id="room" value="#{mainAction.cardElim}">  
+                         <f:selectItems value="#{mainAction.rooms}" />  
+                     </p:selectOneListbox>  
+
+                    <p:selectOneListbox id="suspects" value="#{mainAction.cardElim}">  
+                        <f:selectItems value="#{mainAction.suspects}" />  
+                    </p:selectOneListbox>  
+
+                    <p:selectOneListbox id="weapons" value="#{mainAction.cardElim}">  
+                        <f:facet name="Header">
+                            <h:outputText value="WEAPONS"/>
+                        </f:facet>
+                        <f:selectItems value="#{mainAction.weapons}" />  
+                    </p:selectOneListbox>  
+  
+                </h:panelGrid>
+                <p:separator/>
+                <h:button outcome="main" value="Cancel" />
+            </p:panel>
+        </h:form>
     </h:body>
 </html>
 

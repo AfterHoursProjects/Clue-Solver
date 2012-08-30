@@ -41,4 +41,8 @@ public enum RoomEnum {
 	public Room getRoom() {
 		return this.room;
 	}
+        
+        public String getName() {
+            return this.name();
+        }
 }

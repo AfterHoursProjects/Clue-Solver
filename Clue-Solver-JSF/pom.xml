@@ -14,6 +14,15 @@
 
     <name>Clue-Solver-JSF</name>
 
+<repositories>
+    <repository>
+        <id>prime-repo</id>
+        <name>PrimeFaces Maven Repositiory</name>
+        <url>http://repository.primefaces.org</url>
+        <layout>default</layout>
+    </repository>  
+</repositories>
+
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,16 +59,16 @@
             <artifactId>org.restlet.ext.jaxrs</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.richfaces.core</groupId>
-            <artifactId>richfaces-core-impl</artifactId>
-            <version>4.2.2.Final</version>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>3.4.RC1</version>
         </dependency>
         <dependency>
-            <groupId>org.richfaces.ui</groupId>
-            <artifactId>richfaces-components-ui</artifactId>
-            <version>4.2.2.Final</version>
+            <groupId>el-impl</groupId>
+            <artifactId>el-impl</artifactId>
+            <version>1.0</version>
         </dependency>
-        <dependency>
+         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>

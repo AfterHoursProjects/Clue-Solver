@@ -3,11 +3,11 @@ package com.hoss.jsf;
 import enums.RoomEnum;
 import enums.SuspectEnum;
 import enums.WeaponEnum;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIColumn;
-import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.component.html.HtmlPanelGrid;
 import model.Triple;
 import model.TripleList;
@@ -27,8 +27,15 @@ import service.ServerService;
  */
 @ManagedBean(name = "mainAction")
 @SessionScoped
-public class MainAction {
+public class MainAction implements Serializable {
+        
+    private RoomEnum[] rooms;
+    
+    @ManagedProperty (value="")
+    private String cardElim;
 
+ 
+    
     private HtmlPanelGrid eliminateCardComponenets = null;
     private List<Triple> remainingTriples;
     private String mostLikelyTripleTxt;
@@ -47,42 +54,19 @@ public class MainAction {
         resource.release();
     }
 
-    public HtmlPanelGrid getEliminateCardComponents() {
-        UIColumn col1 = new UIColumn();
-        UIColumn col2 = new UIColumn();
-        UIColumn col3 = new UIColumn();
-        HtmlCommandButton hcb;
-        for (String data : RoomEnum.getStringValues()) {
-            hcb = new HtmlCommandButton();
-            hcb.setValue(data);
-
-            col1.getChildren().add(hcb);
-        }
-
-        for (String data : SuspectEnum.getStringValues()) {
-            hcb = new HtmlCommandButton();
-            hcb.setValue(data);
-
-            col2.getChildren().add(hcb);
-        }
-
-        for (String data : WeaponEnum.getStringValues()) {
-            hcb = new HtmlCommandButton();
-            hcb.setValue(data);
-
-            col3.getChildren().add(hcb);
-        }
-        
-        if (this.eliminateCardComponenets == null) {
-            this.eliminateCardComponenets = new HtmlPanelGrid();
-        }
-        this.eliminateCardComponenets.getChildren().add(col1);
-        this.eliminateCardComponenets.getChildren().add(col2);
-        this.eliminateCardComponenets.getChildren().add(col3);
-
-        return this.eliminateCardComponenets;
-
+    public RoomEnum[] getRooms() {
+        return RoomEnum.values();
     }
+    
+    public SuspectEnum[] getSuspects() {
+        return SuspectEnum.values();
+    }
+    
+    public WeaponEnum[] getWeapons() {
+        return WeaponEnum.values();
+    }
+    
+   
 
     public String getMostLikelyTripleTxt() {
         updateMostLikelyTriple();
@@ -112,5 +96,18 @@ public class MainAction {
 
     public void setRemainingTriples(List<Triple> values) {
         this.remainingTriples = values;
+    }
+    
+    public String doCardElimination(String value) {
+        System.out.println("-----------> Value is "+ value);
+        return "main";
+    }
+    
+       public String getCardElim() {
+        return cardElim;
+    }
+
+    public void setCardElim(String cardElim) {
+        this.cardElim = cardElim;
     }
 }
