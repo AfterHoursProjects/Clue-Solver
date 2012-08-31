@@ -14,6 +14,14 @@ public class Card implements Serializable {
 	protected String type;
 	protected String name;
 
+        
+        public Card() {
+            
+        }
+        public Card(String type, String name) {
+            this.type = type;
+            this.name = name;
+        }
 	/*
 	 * (non-Javadoc)
 	 * 

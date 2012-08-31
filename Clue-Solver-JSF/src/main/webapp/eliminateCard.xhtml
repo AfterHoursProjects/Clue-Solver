@@ -7,33 +7,39 @@
         <title>Eliminate Card</title>
     </h:head>
     <h:body>
-        <h:form>
-            <p:panel style="min-width: 465px;max-width: 465px">
-                <f:facet name="header">
-                    <h:outputText value="Please choose card to eliminate:"/>
-                </f:facet>
-
-                <h:panelGrid columns="3">
-                    <p:selectOneListbox id="room" value="#{mainAction.cardElim}">  
-                         <f:selectItems value="#{mainAction.rooms}" />  
-                     </p:selectOneListbox>  
-
-                    <p:selectOneListbox id="suspects" value="#{mainAction.cardElim}">  
+        <f:view>
+            <h:form>
+                <p:panel style="min-width: 800px;max-width: 800px">
+                    <f:facet name="header">
+                        <h:outputText value="Please choose type of card to eliminate:" />
+                    </f:facet>
+                    <p:selectOneButton id="cardTypes"  value="#{mainAction.cardType}">
+                        <f:selectItem itemLabel="Room"  itemValue="room"  />
+                        <f:selectItem itemLabel="Suspect" itemValue="suspect"/>
+                        <f:selectItem itemLabel="Weapon" itemValue="weapon"/>
+                        <f:ajax event="change" execute="@this" render="cards"/>
+                    </p:selectOneButton>
+                </p:panel>
+                <p:panel id="cards"  style="min-width: 800px;max-width: 800px">
+                    <f:facet name ="header" style="background-color: blue">
+                        <h:outputText value="Please select the card to eliminate: "/>
+                    </f:facet>
+                    <p:selectOneButton id="room" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'room'}">  
+                        <f:selectItems value="#{mainAction.rooms}" />  
+                    </p:selectOneButton>  
+                    <p:selectOneButton id="suspect" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'suspect'}">  
                         <f:selectItems value="#{mainAction.suspects}" />  
-                    </p:selectOneListbox>  
-
-                    <p:selectOneListbox id="weapons" value="#{mainAction.cardElim}">  
-                        <f:facet name="Header">
-                            <h:outputText value="WEAPONS"/>
-                        </f:facet>
+                    </p:selectOneButton> 
+                    <p:selectOneButton id="weapon" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'weapon'}">  
                         <f:selectItems value="#{mainAction.weapons}" />  
-                    </p:selectOneListbox>  
-  
-                </h:panelGrid>
-                <p:separator/>
-                <h:button outcome="main" value="Cancel" />
-            </p:panel>
-        </h:form>
+                    </p:selectOneButton>  
+                </p:panel>
+                <p:panel id="cardactions" style="min-width: 800px;max-width: 800px">
+                    <h:button outcome="main" value="Cancel" />
+                    <h:commandButton value="Submit" action="#{mainAction.doCardElimination}"/>
+                </p:panel>
+            </h:form>
+        </f:view>
     </h:body>
 </html>
 

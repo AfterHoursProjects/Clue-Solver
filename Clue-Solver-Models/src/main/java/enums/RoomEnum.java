@@ -7,7 +7,7 @@ import model.Room;
 public enum RoomEnum {
 	KITCHEN(new Room("kitchen")), 
         
-        Study(new Room("study")), 
+        STUDY(new Room("study")), 
         
         CONSERVATORY(new Room("conservatory")), 
         

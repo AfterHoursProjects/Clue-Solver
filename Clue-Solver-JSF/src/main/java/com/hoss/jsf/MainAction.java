@@ -4,16 +4,20 @@ import enums.RoomEnum;
 import enums.SuspectEnum;
 import enums.WeaponEnum;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlPanelGrid;
+import javax.faces.event.ValueChangeEvent;
+import model.Card;
 import model.Triple;
 import model.TripleList;
 import model.rest.ProbabilityReport;
 import org.restlet.data.Protocol;
 import org.restlet.data.Reference;
+import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.resource.ClientResource;
 import service.ServerService;
 
@@ -28,19 +32,16 @@ import service.ServerService;
 @ManagedBean(name = "mainAction")
 @SessionScoped
 public class MainAction implements Serializable {
-        
-    private RoomEnum[] rooms;
-    
-    @ManagedProperty (value="")
-    private String cardElim;
 
- 
-    
-    private HtmlPanelGrid eliminateCardComponenets = null;
+    @ManagedProperty(value = "")
+    private String cardElim;
+    @ManagedProperty(value = "")
+    private String cardType;
     private List<Triple> remainingTriples;
     private String mostLikelyTripleTxt;
 
     public void updateMostLikelyTriple() {
+        System.out.println("Updating Most likely triple");
         final Reference reference = new Reference("http://localhost/clue/probability.json");
         reference.setHostPort(ServerService.getPort());
 
@@ -57,16 +58,14 @@ public class MainAction implements Serializable {
     public RoomEnum[] getRooms() {
         return RoomEnum.values();
     }
-    
+
     public SuspectEnum[] getSuspects() {
         return SuspectEnum.values();
     }
-    
+
     public WeaponEnum[] getWeapons() {
         return WeaponEnum.values();
     }
-    
-   
 
     public String getMostLikelyTripleTxt() {
         updateMostLikelyTriple();
@@ -79,6 +78,7 @@ public class MainAction implements Serializable {
     }
 
     public List<Triple> getRemainingTriples() {
+        System.out.println("Get Remaining Triples");
         final Reference reference = new Reference("http://localhost/clue/triples/remaining.json");
         reference.setHostPort(ServerService.getPort());
 
@@ -97,17 +97,61 @@ public class MainAction implements Serializable {
     public void setRemainingTriples(List<Triple> values) {
         this.remainingTriples = values;
     }
-    
-    public String doCardElimination(String value) {
-        System.out.println("-----------> Value is "+ value);
+
+    public String doCardElimination() {
+        System.out.println("-----------> Value is " + this.cardType + "/" + this.cardElim);
+
+        final Reference reference = new Reference("http://localhost/clue/cards");
+        reference.setHostPort(ServerService.getPort());
+
+        final ClientResource client = new ClientResource(reference);
+        client.setChallengeResponse(ServerService.getChallengeResponse());
+
+        client.put(new JacksonRepresentation<Card>(findTheCard(this.cardType, this.cardType)));
+
+        client.release();
+        
         return "main";
     }
-    
-       public String getCardElim() {
+
+    public String getCardElim() {
         return cardElim;
     }
 
     public void setCardElim(String cardElim) {
+        System.out.println("calling cardElim setter.." + this.cardElim);
         this.cardElim = cardElim;
+    }
+
+    public String getCardType() {
+        return this.cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    private Card findTheCard(String cardName, String cardType) {
+        Card result = null;
+        if (cardType.equalsIgnoreCase("room")) {
+            for (RoomEnum room: RoomEnum.values()) {
+                if (room.getName().equalsIgnoreCase(cardName)) {
+                    return new Card(cardType,cardName);
+                }
+            }
+        } else if (cardType.equalsIgnoreCase("suspect")) {
+            for (SuspectEnum suspect: SuspectEnum.values()) {
+                if (suspect.name().equalsIgnoreCase(cardName)) {
+                    return new Card(cardType, cardName);
+                }
+            }
+        } else if (cardType.equalsIgnoreCase("weapons")) {
+            for (WeaponEnum weapon: WeaponEnum.values()) {
+                if (weapon.name().equalsIgnoreCase(cardName)) {
+                    return new Card(cardType, cardName);
+                }
+            }
+        }
+        return result;
     }
 }
