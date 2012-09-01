@@ -17,6 +17,8 @@ import com.google.inject.Inject;
 
 import events.ServerSignals;
 
+// Warnings suppressed in this class because they are caused by the TaskService interface
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ClueTaskService extends TaskService {
 	private final ExecutorService executor;
 	private final EventBus eventBus;
@@ -56,8 +58,8 @@ public class ClueTaskService extends TaskService {
 	}
 
 	@Override
-	public Object invokeAny(final Collection tasks, final long timeout, final TimeUnit unit) throws InterruptedException,
-			ExecutionException, TimeoutException {
+	public Object invokeAny(final Collection tasks, final long timeout, final TimeUnit unit)
+			throws InterruptedException, ExecutionException, TimeoutException {
 		return executor.invokeAny(tasks, timeout, unit);
 	}
 
@@ -69,6 +71,16 @@ public class ClueTaskService extends TaskService {
 	@Override
 	public boolean isTerminated() {
 		return executor.isTerminated();
+	}
+
+	@Subscribe
+	public void onStop(ServerSignals.StopSignal signal) {
+		try {
+			eventBus.unregister(this);
+			this.shutdown();
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -94,15 +106,5 @@ public class ClueTaskService extends TaskService {
 	@Override
 	public <T> Future<T> submit(final Runnable task, final T result) {
 		return executor.submit(task, result);
-	}
-
-	@Subscribe
-	public void onStop(ServerSignals.StopSignal signal) {
-		try {
-			eventBus.unregister(this);
-			this.shutdown();
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

@@ -37,6 +37,7 @@ public class CardCounterImpl implements CardCounter {
 
 		for (Entry<Card, ObjectCounter<Card>> entry : cardCountMap.entrySet()) {
 			if (entry.getKey().getClass().equals(cardClass)) {
+				// FIXME: Not sure how/if this is possible without the cast
 				found.add((ObjectCounter<T>) entry.getValue());
 			}
 		}
