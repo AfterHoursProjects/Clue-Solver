@@ -165,6 +165,7 @@
 		<module>Clue-Solver-Rules</module>
 		<module>Clue-Solver-Models</module>
 		<module>Clue-Solver-Rest</module>
+		<module>Clue-Solver-Rest-Client</module>
 		<module>Clue-Solver-Swing</module>
     <module>Clue-Solver-JSF</module>
   </modules>
