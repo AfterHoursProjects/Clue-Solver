@@ -24,14 +24,14 @@
                     <f:facet name ="header" style="background-color: blue">
                         <h:outputText value="Please select the card to eliminate: "/>
                     </f:facet>
-                    <p:selectOneButton id="room" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'room'}">  
-                        <f:selectItems value="#{mainAction.rooms}" />  
+                    <p:selectOneButton id="room" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'room'}" >  
+                        <f:selectItems value="#{mainAction.rooms}"/>  
                     </p:selectOneButton>  
-                    <p:selectOneButton id="suspect" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'suspect'}">  
-                        <f:selectItems value="#{mainAction.suspects}" />  
+                    <p:selectOneButton id="suspect" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'suspect'}" >  
+                        <f:selectItems value="#{mainAction.suspects}"/>  
                     </p:selectOneButton> 
-                    <p:selectOneButton id="weapon" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'weapon'}">  
-                        <f:selectItems value="#{mainAction.weapons}" />  
+                    <p:selectOneButton id="weapon" value="#{mainAction.cardElim}" rendered="#{mainAction.cardType eq 'weapon'}" >  
+                        <f:selectItems value="#{mainAction.weapons}"/>  
                     </p:selectOneButton>  
                 </p:panel>
                 <p:panel id="cardactions" style="min-width: 800px;max-width: 800px">

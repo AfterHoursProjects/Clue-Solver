@@ -14,14 +14,14 @@
 
     <name>Clue-Solver-JSF</name>
 
-<repositories>
-    <repository>
-        <id>prime-repo</id>
-        <name>PrimeFaces Maven Repositiory</name>
-        <url>http://repository.primefaces.org</url>
-        <layout>default</layout>
-    </repository>  
-</repositories>
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repositiory</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>  
+    </repositories>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -68,7 +68,7 @@
             <artifactId>el-impl</artifactId>
             <version>1.0</version>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
@@ -96,7 +96,9 @@
                 <version>2.1.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <outputDirectory>target</outputDirectory>              
                 </configuration>
+                
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -122,6 +124,16 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jboss-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <jbossHome>/usr/software/servers/jboss-6.1.0.Final</jbossHome>
+                    <serverName>default</serverName>
+                    <fileName>target/Clue-Solver-JSF-1.0-SNAPSHOT.war</fileName>
+                </configuration>
             </plugin>
         </plugins>
     </build>

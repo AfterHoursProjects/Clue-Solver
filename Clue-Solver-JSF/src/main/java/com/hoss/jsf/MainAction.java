@@ -4,13 +4,10 @@ import enums.RoomEnum;
 import enums.SuspectEnum;
 import enums.WeaponEnum;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.html.HtmlPanelGrid;
-import javax.faces.event.ValueChangeEvent;
 import model.Card;
 import model.Triple;
 import model.TripleList;
@@ -39,6 +36,7 @@ public class MainAction implements Serializable {
     private String cardType;
     private List<Triple> remainingTriples;
     private String mostLikelyTripleTxt;
+    private String mostLikelyTriplePct;
 
     public void updateMostLikelyTriple() {
         System.out.println("Updating Most likely triple");
@@ -51,6 +49,7 @@ public class MainAction implements Serializable {
 
         ProbabilityReport report = resource.get(ProbabilityReport.class);
         Triple mostLikelyTriple = report.getMostLikelyTriple().getWrappedObject();
+        this.mostLikelyTriplePct = Double.toString((report.getMostLikelyTriple().getCardProbability()) * 100);
         this.mostLikelyTripleTxt = mostLikelyTriple.toString();
         resource.release();
     }
@@ -110,7 +109,7 @@ public class MainAction implements Serializable {
         client.put(new JacksonRepresentation<Card>(findTheCard(this.cardType, this.cardType)));
 
         client.release();
-        
+
         return "main";
     }
 
@@ -134,24 +133,32 @@ public class MainAction implements Serializable {
     private Card findTheCard(String cardName, String cardType) {
         Card result = null;
         if (cardType.equalsIgnoreCase("room")) {
-            for (RoomEnum room: RoomEnum.values()) {
+            for (RoomEnum room : RoomEnum.values()) {
                 if (room.getName().equalsIgnoreCase(cardName)) {
-                    return new Card(cardType,cardName);
+                    return new Card(cardType, cardName);
                 }
             }
         } else if (cardType.equalsIgnoreCase("suspect")) {
-            for (SuspectEnum suspect: SuspectEnum.values()) {
+            for (SuspectEnum suspect : SuspectEnum.values()) {
                 if (suspect.name().equalsIgnoreCase(cardName)) {
                     return new Card(cardType, cardName);
                 }
             }
         } else if (cardType.equalsIgnoreCase("weapons")) {
-            for (WeaponEnum weapon: WeaponEnum.values()) {
+            for (WeaponEnum weapon : WeaponEnum.values()) {
                 if (weapon.name().equalsIgnoreCase(cardName)) {
                     return new Card(cardType, cardName);
                 }
             }
         }
         return result;
+    }
+
+    public String getMostLikelyTriplePct() {
+        return mostLikelyTriplePct;
+    }
+
+    public void setMostLikelyTriplePct(String mostLikelyTriplePct) {
+        this.mostLikelyTriplePct = mostLikelyTriplePct;
     }
 }

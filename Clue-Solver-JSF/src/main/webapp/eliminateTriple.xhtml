@@ -1,13 +1,44 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"  
+      xmlns:f="http://java.sun.com/jsf/core">
+
     <h:head>
         <title>Eliminate Triple</title>
     </h:head>
     <h:body>
-        Hello from ClueSolver idiot!
-        <h:button outcome="main" value="cancel" />
+        <f:view>
+            <h:form>
+                <p:panelGrid columns="3" style="min-width:800px; max-width: 800px">
+                    <f:facet name="header">Choose your triple</f:facet>
+                    
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Weapons"/>
+                        <p:selectOneRadio id="weapons" value="#{tripleAction.weapon}" layout="pageDirection">
+                            <f:selectItems value="#{tripleAction.weapons}"/>
+                        </p:selectOneRadio>                                        
+                    </p:panelGrid>
+
+                    <p:panelGrid columns="2" >
+                        <h:outputText value="Rooms"/>
+                        <p:selectOneRadio id="rooms" value="#{tripleAction.room}" layout="pageDirection" >
+                            <f:selectItems value="#{tripleAction.rooms}" />
+                        </p:selectOneRadio>                                             
+                    </p:panelGrid>
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Suspects"/>
+                        <p:selectOneRadio id="suspects" value="#{tripleAction.suspect}" layout="pageDirection" >
+                            <f:selectItems value="#{tripleAction.suspects}"/>
+                        </p:selectOneRadio>                                             
+                    </p:panelGrid>
+
+                </p:panelGrid>
+                <p:panelGrid columns="2">
+                    <h:button outcome="main" value="Cancel"/>
+                    <h:commandButton value="Submit" action="#{tripleAction.doTripleElimination}"/>
+                </p:panelGrid>
+            </h:form>
+        </f:view>
     </h:body>
 </html>
 
