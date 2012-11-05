@@ -18,7 +18,10 @@ public class ConsoleControl {
 		@Override
 		public synchronized void run() {
 			try {
-				while (listener.lineRead(in.readLine()) == false) {}
+				boolean stop = listener.lineRead(in.readLine());
+				while (stop != false) {
+					stop = listener.lineRead(in.readLine());
+				}
 			} catch (final IOException e) {
 				Throwables.propagate(e);
 			}
