@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
 
 import com.google.common.base.Throwables;
@@ -30,7 +31,7 @@ public class ConsoleControl {
 
 	@Inject
 	public ConsoleControl(InputStream in, InputListener listener, ExecutorService service) {
-		final InputStreamReader converter = new InputStreamReader(in);
+		final InputStreamReader converter = new InputStreamReader(in, Charset.defaultCharset());
 		this.in = new BufferedReader(converter);
 		this.listener = listener;
 		this.service = service;

@@ -9,7 +9,7 @@ import service.ClueSessionService;
  * @author matt
  * 
  */
-public class ClueGameFactory {
+public final class ClueGameFactory {
 	private static final Map<String, ClueSessionService> GAMES = new HashMap<String, ClueSessionService>();
 
 	public static ClueSessionService getGameForUser(final String name) {
