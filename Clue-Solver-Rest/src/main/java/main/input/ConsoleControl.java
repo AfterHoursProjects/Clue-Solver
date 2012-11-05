@@ -20,7 +20,7 @@ public class ConsoleControl {
 		public synchronized void run() {
 			try {
 				boolean stop = listener.lineRead(in.readLine());
-				while (stop != false) {
+				while (!stop) {
 					stop = listener.lineRead(in.readLine());
 				}
 			} catch (final IOException e) {
