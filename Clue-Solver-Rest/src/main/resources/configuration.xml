@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- Configuration definition file that demonstrates the
+     override and additional sections -->
+
+<configuration>
+  <override>
+  	<system />
+    <properties fileName="rest-test.properties" config-optional="true" />
+    <properties fileName="rest.properties" throwExceptionOnMissing="true"/>
+  </override>
+ </configuration>

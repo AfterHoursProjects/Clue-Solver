@@ -33,10 +33,9 @@ import server.ClueServer;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.util.Modules;
 
+import configuration.ConfigurationLoader;
 import dependency.injection.RestModule;
-import dependency.injection.TestModule;
 import enums.RoomEnum;
 import enums.SuspectEnum;
 import enums.WeaponEnum;
@@ -51,10 +50,9 @@ public class ClueServerTest {
 
 	@BeforeClass
 	public static void startTestServer() throws Exception {
-		final Injector injector = Guice.createInjector(Modules.override(new RestModule()).with(new TestModule()));
+		final Injector injector = Guice.createInjector(new RestModule(ConfigurationLoader.getConfiguration()));
 		server = injector.getInstance(ClueServer.class);
 		server.start();
-
 	}
 
 	@AfterClass
@@ -110,7 +108,7 @@ public class ClueServerTest {
 		resource.setChallengeResponse(getChallengeResponse());
 
 		System.out.println(resource.get().getText());
-		ProbabilityReport report = resource.get(ProbabilityReport.class);
+		final ProbabilityReport report = resource.get(ProbabilityReport.class);
 		System.out.println(report.getMostLikelyRoom().getCardProbability());
 		resource.release();
 	}

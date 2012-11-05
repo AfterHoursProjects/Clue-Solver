@@ -10,16 +10,17 @@ import com.google.common.eventbus.EventBus;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-public class TestInjection {
+import configuration.ConfigurationLoader;
 
+public class TestInjection {
 	@Test
 	public void testSingletons() {
-		Injector injector = Guice.createInjector(new RestModule());
-		
-		ClueServer firstServerInstance = injector.getInstance(ClueServer.class);
+		final Injector injector = Guice.createInjector(new RestModule(ConfigurationLoader.getConfiguration()));
+
+		final ClueServer firstServerInstance = injector.getInstance(ClueServer.class);
 		assertTrue("Expected ClueServer.class to be a singleton", firstServerInstance == injector.getInstance(ClueServer.class));
-		
-		EventBus firstEventBusInstance = injector.getInstance(EventBus.class);
-		assertTrue("Expected EventBus.class to be a singleton",firstEventBusInstance == injector.getInstance(EventBus.class));
+
+		final EventBus firstEventBusInstance = injector.getInstance(EventBus.class);
+		assertTrue("Expected EventBus.class to be a singleton", firstEventBusInstance == injector.getInstance(EventBus.class));
 	}
 }

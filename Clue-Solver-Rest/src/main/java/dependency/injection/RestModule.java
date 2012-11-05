@@ -7,6 +7,9 @@ import main.input.ConsoleControl;
 import main.input.InputListener;
 import main.input.UserInputListener;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.restlet.service.TaskService;
 
 import server.ClueServer;
@@ -30,6 +33,12 @@ import dependency.providers.ExecutorServiceProvider;
  * 
  */
 public class RestModule extends AbstractModule {
+	private final Logger log = LogManager.getLogger(RestModule.class);
+	private final Configuration config;
+
+	public RestModule(Configuration config) {
+		this.config = config;
+	}
 
 	@Override
 	protected void configure() {
@@ -37,17 +46,18 @@ public class RestModule extends AbstractModule {
 
 		// This binding is used to set the port number, could be modified to something that
 		// read an external config file, command line argument, jvm argument, etc
-		bind(Integer.class).annotatedWith(Names.named("serverPort")).toInstance(1234);
+		final int serverPort = config.getInt("serverPort");
+		bind(Integer.class).annotatedWith(Names.named("serverPort")).toInstance(serverPort);
+		log.info("Bound server to port {}", serverPort);
 
 		// Arguments for the thread pool setup
-		bind(Integer.class).annotatedWith(Names.named("coreThreadPoolSize")).toInstance(10);
-		bind(Integer.class).annotatedWith(Names.named("maxThreads")).toInstance(30);
-		bind(Integer.class).annotatedWith(Names.named("extraThreadsTimeout")).toInstance(10);
+		bind(Integer.class).annotatedWith(Names.named("coreThreadPoolSize")).toInstance(config.getInt("coreThreadPoolSize"));
+		bind(Integer.class).annotatedWith(Names.named("maxThreads")).toInstance(config.getInt("maxThreads"));
+		bind(Integer.class).annotatedWith(Names.named("extraThreadsTimeout")).toInstance(config.getInt("extraThreadsTimeout"));
 
 		// Creates the blocking queue for jobs waiting to execute
-		BlockingQueue<Runnable> blockingQueue = Queues.newLinkedBlockingQueue(500);
-		bind(new TypeLiteral<BlockingQueue<Runnable>>() {
-		}).annotatedWith(Names.named("threadQueue")).toInstance(blockingQueue);
+		final BlockingQueue<Runnable> blockingQueue = Queues.newLinkedBlockingQueue(config.getInt("maxWaiting"));
+		bind(new TypeLiteral<BlockingQueue<Runnable>>() {}).annotatedWith(Names.named("threadQueue")).toInstance(blockingQueue);
 
 		// Setup the executor service which should manage all application threads
 		bind(ExecutorService.class).toProvider(ExecutorServiceProvider.class).in(Scopes.SINGLETON);
