@@ -9,6 +9,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.restlet.service.TaskService;
 
 import com.google.common.eventbus.EventBus;
@@ -22,6 +24,7 @@ import events.ServerSignals;
 public class ClueTaskService extends TaskService {
 	private final ExecutorService executor;
 	private final EventBus eventBus;
+	private final Logger log = LogManager.getLogger(ClueTaskService.class);
 
 	@Inject
 	public ClueTaskService(final ExecutorService executor, final EventBus eventBus) {
@@ -58,8 +61,8 @@ public class ClueTaskService extends TaskService {
 	}
 
 	@Override
-	public Object invokeAny(final Collection tasks, final long timeout, final TimeUnit unit)
-			throws InterruptedException, ExecutionException, TimeoutException {
+	public Object invokeAny(final Collection tasks, final long timeout, final TimeUnit unit) throws InterruptedException, ExecutionException,
+			TimeoutException {
 		return executor.invokeAny(tasks, timeout, unit);
 	}
 
@@ -79,7 +82,7 @@ public class ClueTaskService extends TaskService {
 			eventBus.unregister(this);
 			this.shutdown();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 	}
 

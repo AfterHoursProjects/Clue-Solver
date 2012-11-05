@@ -2,6 +2,8 @@ package server;
 
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.Context;
 import org.restlet.Request;
@@ -15,6 +17,7 @@ import org.restlet.service.TaskService;
 
 import restlets.ClueRestService;
 
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -28,6 +31,7 @@ import events.ServerSignals;
  */
 public class ClueServer {
 	private final Component component;
+	private final Logger log = LogManager.getLogger(ClueServer.class);
 	private final Set<String> authorizedUsers = ImmutableSet.of("matt", "bobby");
 	private EventBus eventBus;
 
@@ -47,8 +51,7 @@ public class ClueServer {
 		application.getConverterService().setEnabled(true);
 		application.add(new ClueRestService());
 
-		final ChallengeAuthenticator authenticator = new ChallengeAuthenticator(application.getContext(),
-				ChallengeScheme.HTTP_BASIC, null);
+		final ChallengeAuthenticator authenticator = new ChallengeAuthenticator(application.getContext(), ChallengeScheme.HTTP_BASIC, null);
 		authenticator.setVerifier(new Verifier() {
 
 			@Override
@@ -75,15 +78,25 @@ public class ClueServer {
 			eventBus.unregister(this);
 			this.stop();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			// We do not want to stop with an exception here,
+			// as it could stop others from closing
+			log.error(e);
 		}
 	}
 
-	public void start() throws Exception {
-		component.start();
+	public void start() {
+		try {
+			component.start();
+		} catch (final Exception e) {
+			throw Throwables.propagate(e);
+		}
 	}
 
-	public void stop() throws Exception {
-		component.stop();
+	public void stop() {
+		try {
+			component.stop();
+		} catch (final Exception e) {
+			throw Throwables.propagate(e);
+		}
 	}
 }

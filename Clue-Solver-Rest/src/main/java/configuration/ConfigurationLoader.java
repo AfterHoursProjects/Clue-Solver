@@ -7,18 +7,18 @@ import com.google.common.base.Throwables;
 
 public final class ConfigurationLoader {
 	public static final String CONFIGURATION_PATH = "configuration.xml";
-	private static final Configuration config;
+	private static final Configuration CONFIG;
 
 	static {
 		try {
-			config = new DefaultConfigurationBuilder(CONFIGURATION_PATH).getConfiguration(true);
+			CONFIG = new DefaultConfigurationBuilder(CONFIGURATION_PATH).getConfiguration(true);
 		} catch (final Exception e) {
 			throw Throwables.propagate(e);
 		}
 	}
 
 	public static Configuration getConfiguration() {
-		return config;
+		return CONFIG;
 	}
 
 	private ConfigurationLoader() {

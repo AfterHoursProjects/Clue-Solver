@@ -16,7 +16,7 @@ import dependency.injection.RestModule;
  * 
  */
 public final class ClueMain {
-	public static void main(final String args[]) throws Exception {
+	public static void main(final String args[]) {
 		// Gets the injector for our context
 		final Injector injector = Guice.createInjector(new RestModule(ConfigurationLoader.getConfiguration()));
 

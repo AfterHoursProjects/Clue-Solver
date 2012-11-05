@@ -1,5 +1,6 @@
 package main.input;
 
+import com.google.common.base.Throwables;
 import com.google.common.eventbus.EventBus;
 import com.google.inject.Inject;
 
@@ -13,6 +14,7 @@ public class UserInputListener implements InputListener {
 		this.eventBus = eventBus;
 	}
 
+	@Override
 	public boolean lineRead(String input) {
 		// Check for user input of quit
 		if ("quit".equalsIgnoreCase(input)) {
@@ -21,8 +23,7 @@ public class UserInputListener implements InputListener {
 				eventBus.post(ServerSignals.getStopSignal());
 				return true;
 			} catch (final Exception e) {
-				// TODO: Better exception handling
-				e.printStackTrace();
+				Throwables.propagate(e);
 			}
 		}
 

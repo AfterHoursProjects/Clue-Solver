@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.ExecutorService;
 
-
+import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 
 public class ConsoleControl {
@@ -18,10 +18,9 @@ public class ConsoleControl {
 		@Override
 		public synchronized void run() {
 			try {
-				while (listener.lineRead(in.readLine()) == false) {
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+				while (listener.lineRead(in.readLine()) == false) {}
+			} catch (final IOException e) {
+				Throwables.propagate(e);
 			}
 		}
 	}

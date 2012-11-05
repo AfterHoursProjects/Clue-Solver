@@ -16,7 +16,7 @@ import service.probability.ProbabilityCalculatorImpl;
 @Path("probability")
 public class ProbabilitesResource {
 	@Context
-	SecurityContext security;
+	private SecurityContext security;
 	private final ProbabilityCalculator calculator = new ProbabilityCalculatorImpl();
 
 	@GET

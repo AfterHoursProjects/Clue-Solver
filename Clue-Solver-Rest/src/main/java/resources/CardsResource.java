@@ -20,13 +20,13 @@ import service.ClueSessionService;
 @Path("cards")
 public class CardsResource {
 	@Context
-	SecurityContext security;
+	private SecurityContext security;
 
 	/**
 	 * Inserts a card into the rule session
 	 * 
 	 * @param toInsert
-	 *            the Card to be inserted into the rule session
+	 *          the Card to be inserted into the rule session
 	 */
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })

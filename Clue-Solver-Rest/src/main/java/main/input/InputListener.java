@@ -6,5 +6,5 @@ public interface InputListener {
 	 * 
 	 * @return return a true to stop the controller, return false to keep the controller going
 	 */
-	public boolean lineRead(String input);
+	boolean lineRead(String input);
 }

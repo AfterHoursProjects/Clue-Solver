@@ -7,7 +7,7 @@ package events;
  * 
  */
 public abstract class ServerSignals {
-	public static class StopSignal {
+	public static final class StopSignal {
 		private StopSignal() {
 		}
 	};
