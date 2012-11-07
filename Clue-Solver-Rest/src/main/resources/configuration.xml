@@ -3,9 +3,7 @@
      override and additional sections -->
 
 <configuration>
-  <override>
-  	<system />
-    <properties fileName="rest-test.properties" config-optional="true" />
-    <properties fileName="rest.properties" throwExceptionOnMissing="true"/>
-  </override>
- </configuration>
+  	<system config-name="user defined system properties"/>
+    <properties fileName="rest-test.properties" config-optional="true" config-name="test properties"/>
+    <properties fileName="rest.properties" config-name="default properties"/>
+</configuration>

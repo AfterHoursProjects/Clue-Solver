@@ -30,7 +30,7 @@ public class Probability<T> implements Comparable<Probability<T>> {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!this.getClass().equals(obj.getClass())) {
+		if (obj != null && this.getClass().equals(obj.getClass())) {
 			final Probability<?> other = (Probability<?>) obj;
 			return Objects.equal(other.cardProbability, this.cardProbability) && Objects.equal(wrappedObject, other.wrappedObject);
 		}
