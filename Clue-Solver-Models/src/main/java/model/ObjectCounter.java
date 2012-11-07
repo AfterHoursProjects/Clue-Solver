@@ -17,6 +17,11 @@ public class ObjectCounter<T> implements Comparable<ObjectCounter<T>> {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hashCode(count, card);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && this.getClass().equals(obj.getClass())) {
 			final ObjectCounter<?> other = (ObjectCounter<?>) obj;
