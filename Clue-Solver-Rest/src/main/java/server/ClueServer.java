@@ -1,6 +1,7 @@
 package server;
 
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +35,7 @@ public class ClueServer {
 	private EventBus eventBus;
 
 	@Inject
-	public ClueServer(final int port, final EventBus eventBus, final TaskService taskService) {
+	public ClueServer(final int port, final EventBus eventBus, final ExecutorService executor) {
 		this.eventBus = eventBus;
 		eventBus.register(this);
 
@@ -44,7 +45,7 @@ public class ClueServer {
 		final Context childContext = component.getContext().createChildContext();
 
 		final JaxRsApplication application = new JaxRsApplication(childContext);
-		application.setTaskService(taskService);
+		TaskService.wrap(executor);
 		application.getTunnelService().setExtensionsTunnel(true);
 		application.getConverterService().setEnabled(true);
 		application.add(new ClueRestService());

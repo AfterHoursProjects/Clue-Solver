@@ -10,10 +10,8 @@ import main.input.UserInputListener;
 import org.apache.commons.configuration.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.restlet.service.TaskService;
 
 import server.ClueServer;
-import server.ClueTaskService;
 
 import com.google.common.collect.Queues;
 import com.google.common.eventbus.EventBus;
@@ -61,9 +59,6 @@ public class RestModule extends AbstractModule {
 
 		// Setup the executor service which should manage all application threads
 		bind(ExecutorService.class).toProvider(ExecutorServiceProvider.class).in(Scopes.SINGLETON);
-
-		// Setup the task executor service, this wraps up the executor service into the restlet task service interface
-		bind(TaskService.class).to(ClueTaskService.class).in(Scopes.SINGLETON);
 
 		// Binds the ClueServer class to the ClueServer builder
 		bind(ClueServer.class).toProvider(ClueServerProvider.class).in(Scopes.SINGLETON);
