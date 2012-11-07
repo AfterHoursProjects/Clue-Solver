@@ -5,21 +5,21 @@ import java.util.HashSet;
 import model.Suspect;
 
 public enum SuspectEnum {
-	MUSTARD(new Suspect("mustard")), 
-        
-        SCARLET(new Suspect("scarlet")), 
-        
-        PLUM(new Suspect("plum")), 
-        
-        GREEN(new Suspect("green")), 
-        
-        WHITE(new Suspect("white")), 
-        
-        PEACOCK(new Suspect("peacock"));
+	MUSTARD(new Suspect("mustard")),
+
+	SCARLET(new Suspect("scarlet")),
+
+	PLUM(new Suspect("plum")),
+
+	GREEN(new Suspect("green")),
+
+	WHITE(new Suspect("white")),
+
+	PEACOCK(new Suspect("peacock"));
 
 	public static Iterable<String> getStringValues() {
-		HashSet<String> suspects = new HashSet<String>();
-		for (SuspectEnum renum : values()) {
+		final HashSet<String> suspects = new HashSet<String>();
+		for (final SuspectEnum renum : values()) {
 			suspects.add(renum.name());
 		}
 

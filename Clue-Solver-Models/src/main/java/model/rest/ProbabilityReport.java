@@ -19,10 +19,10 @@ public class ProbabilityReport {
 	private List<Probability<Room>> rooms;
 	private List<Probability<Weapon>> weapons;
 	private List<Probability<Suspect>> suspects;
-	Probability<Room> mostLikelyRoom;
-	Probability<Suspect> mostLikelySuspect;
-	Probability<Weapon> mostLikelyWeapon;
-	Probability<Triple> mostLikelyTriple;
+	private Probability<Room> mostLikelyRoom;
+	private Probability<Suspect> mostLikelySuspect;
+	private Probability<Weapon> mostLikelyWeapon;
+	private Probability<Triple> mostLikelyTriple;
 
 	public ProbabilityReport() {
 	}
@@ -48,7 +48,7 @@ public class ProbabilityReport {
 	}
 
 	@XmlElementWrapper
-	@XmlElement(name="roomProbability")
+	@XmlElement(name = "roomProbability")
 	public List<Probability<Room>> getRooms() {
 		return rooms;
 	}

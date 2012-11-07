@@ -60,7 +60,7 @@ public class Triple {
 
 	/**
 	 * @param room
-	 *            the {@link Room} this triple is representing
+	 *          the {@link Room} this triple is representing
 	 * @see RoomEnum
 	 */
 	public void setRoom(final Room room) {
@@ -69,7 +69,7 @@ public class Triple {
 
 	/**
 	 * @param room
-	 *            the {@link Suspect} this triple is representing
+	 *          the {@link Suspect} this triple is representing
 	 * @see SuspectEnum
 	 */
 	public void setSuspect(final Suspect suspect) {
@@ -78,16 +78,17 @@ public class Triple {
 
 	/**
 	 * @param room
-	 *            the {@link Weapon} this triple is representing
+	 *          the {@link Weapon} this triple is representing
 	 * @see WeaponEnum
 	 */
 	public void setWeapon(final Weapon weapon) {
 		this.weapon = weapon;
 	}
 
+	@Override
 	public String toString() {
-		return new StringBuilder().append(weapon.toString()).append(" - ").append(room.toString()).append(" - ")
-				.append(suspect.toString()).toString();
+		return new StringBuilder().append(weapon.toString()).append(" - ").append(room.toString()).append(" - ").append(suspect.toString())
+				.toString();
 	}
 
 }

@@ -11,10 +11,6 @@ import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 
 public class ConsoleControl {
-	private final BufferedReader in;
-	private final InputListener listener;
-	private final ExecutorService service;
-
 	public class InputListenerThread implements Runnable {
 		@Override
 		public synchronized void run() {
@@ -28,6 +24,11 @@ public class ConsoleControl {
 			}
 		}
 	}
+
+	private final BufferedReader in;
+	private final InputListener listener;
+
+	private final ExecutorService service;
 
 	@Inject
 	public ConsoleControl(InputStream in, InputListener listener, ExecutorService service) {

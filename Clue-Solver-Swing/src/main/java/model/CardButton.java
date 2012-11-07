@@ -15,10 +15,10 @@ import service.ServerService;
 public class CardButton extends JButton {
 
 	private static final long serialVersionUID = -1781960193283468886L;
-	private Card card;
+	private final Card card;
 
 	public CardButton(final Card card, final EliminateCardPopUp parent) {
-		super(card.name);
+		super(card.getName());
 		this.card = card;
 		addActionListener(new ActionListener() {
 

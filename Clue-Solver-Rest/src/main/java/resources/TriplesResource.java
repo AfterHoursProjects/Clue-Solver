@@ -30,7 +30,7 @@ public class TriplesResource {
 	 * Put a {@link Triple} into the game session
 	 * 
 	 * @param toInsert
-	 *            The triple that is to be inserted, this can be either JSON or XML
+	 *          The triple that is to be inserted, this can be either JSON or XML
 	 */
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
@@ -38,18 +38,18 @@ public class TriplesResource {
 		final ClueSessionService game = ClueGameFactory.getGameForUser(security.getUserPrincipal().getName());
 		game.eliminateTriple(toInsert);
 	}
-	
+
 	/**
-	 * Returns a list of the remaining triples, if none are left an empty list will 
-	 * be returned
+	 * Returns a list of the remaining triples, if none are left an empty list will be returned
+	 * 
 	 * @return all remaining triples
 	 */
 	@GET
 	@Path("remaining")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 	public TripleList remaining() {
 		final ClueSessionService game = ClueGameFactory.getGameForUser(security.getUserPrincipal().getName());
 		return game.getPossibilities();
 	}
-	
+
 }

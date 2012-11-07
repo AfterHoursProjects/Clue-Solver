@@ -15,8 +15,6 @@ import org.restlet.security.ChallengeAuthenticator;
 import org.restlet.security.Verifier;
 import org.restlet.service.TaskService;
 
-import restlets.ClueRestService;
-
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.eventbus.EventBus;

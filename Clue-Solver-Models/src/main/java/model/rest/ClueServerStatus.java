@@ -11,9 +11,10 @@ import model.Triple;
 
 /**
  * Container for the current status of the servers game
+ * 
  * @author matt
  */
-@XmlRootElement(name="status")
+@XmlRootElement(name = "status")
 public class ClueServerStatus {
 	private List<Triple> remainingTriples;
 	private List<Card> remainingCards;
@@ -23,7 +24,7 @@ public class ClueServerStatus {
 	 * @see Card
 	 */
 	@XmlElementWrapper
-	@XmlElement(name="card")
+	@XmlElement(name = "card")
 	public List<Card> getRemainingCards() {
 		return remainingCards;
 	}
@@ -33,14 +34,14 @@ public class ClueServerStatus {
 	 * @see Triple
 	 */
 	@XmlElementWrapper
-	@XmlElement(name="triple")
+	@XmlElement(name = "triple")
 	public List<Triple> getRemainingTriples() {
 		return remainingTriples;
 	}
 
 	/**
 	 * @param remainingCards
-	 *            the remainingCards to set
+	 *          the remainingCards to set
 	 * @see Card
 	 */
 	public void setRemainingCards(final List<Card> remainingCards) {
@@ -49,7 +50,7 @@ public class ClueServerStatus {
 
 	/**
 	 * @param remainingTriples
-	 *            the remainingTriples to set
+	 *          the remainingTriples to set
 	 * @see Triple
 	 */
 	public void setRemainingTriples(final List<Triple> remainingTriples) {

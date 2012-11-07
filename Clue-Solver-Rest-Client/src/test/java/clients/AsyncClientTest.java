@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import java.util.List;
 
 import model.Triple;
+import models.User;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,8 +18,9 @@ public class AsyncClientTest {
 	@Test
 	@Ignore("No code behind this yet, test is being used to design API")
 	public void testGetRemaining() {
-		AsyncClient client = ClueClients.newAsyncClient("http:\\localhost:1234");
-		ListenableFuture<List<Triple>> triples = client.getRemainingTriples();
+		final User user = null;
+		final AsyncClient client = ClueClients.newAsyncClient("http:\\localhost:1234", user);
+		final ListenableFuture<List<Triple>> triples = client.getRemainingTriples();
 		assertFalse(Futures.get(triples, RuntimeException.class).isEmpty());
 	}
 }

@@ -1,11 +1,16 @@
 package enums;
 
 public enum CardTypes {
-	WEAPON("Weapon"), SUSPECT("Suspect"), ROOM("Room");
-
-	String name;
+	WEAPON("Weapon"),
+	SUSPECT("Suspect"),
+	ROOM("Room");
+	private String label;
 
 	private CardTypes(String name) {
-		this.name = name;
+		this.label = name;
+	}
+
+	public String label() {
+		return label;
 	}
 }
