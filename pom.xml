@@ -16,7 +16,7 @@
 	</distributionManagement>
 
 	<properties>
-		<restletVersion>2.0.13</restletVersion>
+		<restletVersion>2.4.3</restletVersion>
 		<slf4jVersion>1.7.2</slf4jVersion>
 		<jdkVersion>1.6</jdkVersion>
 		<encoding>UTF-8</encoding>
